@@ -4,16 +4,20 @@ export default {
   theme: {
     extend: {
       screens: {
-        mobile: { max: "780px" },
+        mobile: { max: "1000px" },
         widescreen: { min: "780px" },
+        mobileSmall: { max: "500px" },
       },
       colors: {
-        primary: "",
-        secondary: "",
+        primary: "#1BA3C1",
+        secondary: "#202342",
         background: "",
         foreground: "",
         front: "",
         back: "",
+      },
+      spacing: {
+        extraLarge: "80px",
       },
       borderRadius: {
         inherit: "inherit",
