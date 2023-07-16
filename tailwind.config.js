@@ -28,6 +28,12 @@ export default {
       zIndex: {
         1: 1,
       },
+      height: {
+        inherit: "inherit",
+      },
+      content: {
+        visible: '" "',
+      },
     },
   },
   plugins: [],
