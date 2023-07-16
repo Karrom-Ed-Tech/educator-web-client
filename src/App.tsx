@@ -20,10 +20,11 @@ export default function App() {
     )
   );
 
-  return <GlobalContextProvider>
-
-    <RouterProvider router={router} />;
-  </GlobalContextProvider>
+  return (
+    <GlobalContextProvider>
+      <RouterProvider router={router} />;
+    </GlobalContextProvider>
+  );
 }
 
 function Root() {
