@@ -9,10 +9,10 @@ const navItems = [
 function Navbar() {
   return (
     <nav className="flex justify-center py-8 p-page items-center bg-white shadow-black-500/100">
-      <div className="text-3xl font-bold">
+      <Link to="/" className="text-3xl font-bold">
         Karr
         <span className="text-primary">o</span>m
-      </div>
+      </Link>
 
       <div className="flex-1 flex justify-center gap-x-12">
         {navItems.map((item, i) => (

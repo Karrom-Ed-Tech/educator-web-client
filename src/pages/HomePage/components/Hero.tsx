@@ -35,6 +35,7 @@ export default function Hero() {
           className="object-contain h-inherit p-10"
           src="/images/illustrations/home-hero.png"
           alt="homepage educator illustration"
+          draggable={false}
         />
       </div>
     </section>
