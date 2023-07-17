@@ -25,7 +25,7 @@ export default function HowToApply() {
         Follow these 3 simple steps
       </h2>
 
-      <div className="py-12 flex relative justify-evenly w-full">
+      <div className="py-12 flex relative justify-center w-full">
         <img
           src="https://i.pinimg.com/originals/10/f4/c2/10f4c29e4f0c7a53cc7b7ca4822e82d9.png"
           alt="question mark"
@@ -33,22 +33,39 @@ export default function HowToApply() {
           draggable={false}
         />
         {steps.map((step, index) => (
-          <div
-            key={index}
-            className="flex flex-col gap-y-4 items-center"
-            style={{ maxWidth: `${60 / steps.length}%` }}
-          >
-            <h5 className="text-lg font-medium text-secondary">
-              Step {index + 1}
-            </h5>
-            <MaterialIcon
-              className="bg-primary text-back aspect-square text-5xl p-4 rounded-full"
-              codepoint={step.icon}
-            />
-            <p className="text-xl font-light">{step.content}</p>
-          </div>
+          <>
+            <div
+              key={index}
+              className="flex flex-col gap-y-4 items-center"
+              style={{ maxWidth: `${60 / steps.length}%` }}
+            >
+              <h5 className="text-lg font-medium text-secondary">
+                Step {index + 1}
+              </h5>
+              <MaterialIcon
+                className="bg-primary text-back aspect-square text-5xl p-4 rounded-full"
+                codepoint={step.icon}
+              />
+              <p className="text-xl font-light">{step.content}</p>
+            </div>
+            {steps.indexOf(step) < steps.length - 1 && (
+              <div
+                className="border-2 border-dashed h-0 border-front relative self-center"
+                style={{ width: `${50 / (steps.length + 1)}%` }}
+              >
+                <MaterialIcon
+                  codepoint="e5e1"
+                  className="absolute right-0 translate-x-full top-1/2 -translate-y-1/2"
+                />
+              </div>
+            )}
+          </>
         ))}
       </div>
+
+      <p className="mt-16 shadow-md p-5 rounded-full text-primary brightness-75">
+        Your application will be verified by our admins
+      </p>
     </section>
   );
 }
