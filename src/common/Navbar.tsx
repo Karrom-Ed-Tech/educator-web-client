@@ -23,7 +23,7 @@ function Navbar() {
       </div>
 
       <div>
-        <button className="p-3 px-5 border text-sm font-medium border-black">
+        <button className="p-3 px-5 border text-sm font-medium border-front duration-300 hover:bg-front hover:text-back">
           Get Started
         </button>
       </div>

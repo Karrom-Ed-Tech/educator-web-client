@@ -24,7 +24,7 @@ export default function Hero() {
             placeholder="Enter your email"
             className="bg-transparent border-b border-front p-5 w-3/5"
           />
-          <button className="text-sm font-medium bg-foreground text-back px-8">
+          <button className="text-sm font-medium bg-foreground text-back px-8 border border-foreground duration-300 hover:bg-transparent hover:text-front">
             Sign up
           </button>
         </div>
