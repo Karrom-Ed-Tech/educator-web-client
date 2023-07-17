@@ -16,7 +16,7 @@ const socials = [
 
 export default function Footer() {
   return (
-    <section className="p-page flex py-12 overflow-hidden relative">
+    <section className="p-page flex py-12 overflow-hidden relative mt-5">
       <div className="absolute top-0 left-0 w-[70%] bg-secondary -translate-x-[30%] rounded-full aspect-square -z-1" />
       <div className="basis-1/2 flex flex-col gap-y-6 text-back">
         <Link to="/" className="text-3xl font-bold w-max">
