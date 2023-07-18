@@ -10,7 +10,7 @@ export default function Hero() {
           <br /> educators
         </h1>
 
-        <div className="w-1/2 widescreen:w-full">
+        <div className="w-1/2 widescreen:w-11/12">
           <h3 className="font-serif font-semibold mb-3">Introduction</h3>
           <p className="text-lg font-light">
             Get rid of the routine feel from your teaching process. Join Karrom
