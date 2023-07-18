@@ -25,19 +25,19 @@ export default function HowToApply() {
         Follow these 3 simple steps
       </h2>
 
-      <div className="py-12 flex relative justify-center w-full">
+      <div className="py-12 flex relative justify-center w-full mobile:flex mobile:flex-col mobile:items-center mobile:justify-center">
         <img
           src="https://i.pinimg.com/originals/10/f4/c2/10f4c29e4f0c7a53cc7b7ca4822e82d9.png"
           alt="question mark"
-          className="absolute bottom-0 left-0 w-20 rotate-[18deg] selection:hidden"
+          className="absolute bottom-0 opacity-40 left-0 w-20 rotate-[18deg] selection:hidden mobile:bottom-100"
           draggable={false}
         />
         {steps.map((step, index) => (
           <>
             <div
               key={index}
-              className="flex flex-col gap-y-4 items-center"
-              style={{ maxWidth: `${60 / steps.length}%` }}
+              // style={{ maxWidth: `${60 / steps.length}%` }}
+              className="flex flex-col gap-y-4 items-center max-w-1/5 mobile:max-w-full"
             >
               <h5 className="text-lg font-medium text-secondary">
                 Step {index + 1}
@@ -50,7 +50,7 @@ export default function HowToApply() {
             </div>
             {steps.indexOf(step) < steps.length - 1 && (
               <div
-                className="border-2 border-dashed h-0 border-front relative self-center"
+                className="border-2 border-dashed h-0 border-front relative self-center mobile:rotate-90 mobile:my-16"
                 style={{ width: `${50 / (steps.length + 1)}%` }}
               >
                 <MaterialIcon

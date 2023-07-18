@@ -5,7 +5,8 @@ export default {
     extend: {
       screens: {
         mobile: { max: "780px" },
-        widescreen: { min: "780px" },
+        "mobile-min": { min: "780px" },
+        widescreen: { max: "1140px" },
       },
       colors: {
         primary: "#1BA3C1",
@@ -17,6 +18,16 @@ export default {
       },
       spacing: {
         xl: "80px",
+        xxl: "500px",
+      },
+      width: {
+        108: "26rem",
+        112: "28rem",
+        128: "32rem",
+      },
+      height: {
+        112: "28rem",
+        128: "32rem",
       },
       borderRadius: {
         inherit: "inherit",

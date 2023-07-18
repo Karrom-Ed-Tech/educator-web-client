@@ -11,20 +11,18 @@ const checkpoints = [
 
 export default function GoodFit() {
   return (
-    <section className="flex p-page py-36 items-center">
-      <div className="basis-1/2">
-        <h1 className="text-6xl font-medium">
+    <section className="flex p-page py-36 items-center widescreen:flex-col-reverse widescreen:py-12 widescreen:justify-center widescreen:w-full mobile:w-11/12 ">
+      <div className="basis-1/2 widescreen:basis-1 widescreen:w-full">
+        <h1 className="text-6xl w-9/12 font-medium widescreen:text-4xl widescreen:w-full">
           How do I know
-          <br />
           if I'm a good fit
-          <br />
           for <span className="text-primary">Karrom</span>?
         </h1>
-        <ul className="my-8 flex flex-col gap-y-3">
+        <ul className="my-8 flex flex-col gap-y-3 widescreen:flex-wrap">
           {checkpoints.map((point, i) => (
             <li
               key={i}
-              className="flex items-center text-lg font-light tracking-tight whitespace-nowrap"
+              className="flex items-center text-lg font-light tracking-tight whitespace-nowrap widescreen:w-full widescreen:items-start widescreen:whitespace-normal"
             >
               <MaterialIcon
                 codepoint="e838"
@@ -36,11 +34,11 @@ export default function GoodFit() {
         </ul>
       </div>
 
-      <div className="basis-1/2 h-inherit">
+      <div className="basis-1/2 widescreen:w-11/12 widescreen:h-11/12 widescreen:basis-1 widescreen:flex widescreen:items:center widescreen:justify-center">
         <img
           src="/images/illustrations/good-teacher.png"
           alt="good fit teacher violin"
-          className="h-inherit"
+          // className="h-inherit"
         />
       </div>
     </section>

@@ -1,16 +1,16 @@
 export default function Hero() {
   return (
-    <section className="flex p-page h-[90vh]">
-      <div className="basis-1/2 flex flex-col justify-center items-center gap-y-16">
-        <h1 className="text-7xl leading-tight font-raleway">
-          online{" "}
+    <section className="flex p-page widescreen:flex-col-reverse widescreen:justify-center widescreen:items-center">
+      <div className="basis-1/2 flex flex-col justify-center items-center gap-y-16 widscreen:basis-1">
+        <h1 className="text-7xl leading-tight font-raleway widescreen:text-5xl widescreen:mt-20">
+          Online{" "}
           <span className="font-medium font-poppins">
             classes <br /> made fun for
           </span>
           <br /> educators
         </h1>
 
-        <div className="w-1/2 before:content-visible before:bg-opacity-50 before:h-full relative before:left-1/2 before:top-0 before:-translate-x-1/2 before:bg-primary before:absolute before:-z-1 before:blur-3xl before:aspect-square">
+        <div className="w-1/2 widescreen:w-full">
           <h3 className="font-serif font-semibold mb-3">Introduction</h3>
           <p className="text-lg font-light">
             Get rid of the routine feel from your teaching process. Join Karrom
@@ -18,6 +18,8 @@ export default function Hero() {
           </p>
         </div>
 
+        {/* <div className="absolute mt-96 before:content-visible before:bg-opacity-50 before:h-full before:left-1/2 before:top-0 before:-translate-x-1/2 before:bg-primary before:absolute before:-z-1 before:blur-3xl before:aspect-square">
+        </div> */}
         <div className="flex w-full justify-center">
           <input
             type="text"
@@ -30,9 +32,9 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="basis-1/2 h-full">
+      <div className="basis-1/2 widescreen:basis-1 widescreen:w-96 widescreen:h-96 widescreen:mt-16 widescreen:flex widescreen:items-center widescreen:justify-center">
         <img
-          className="object-contain h-inherit p-10"
+          className="object-contain h-inherit"
           src="/images/illustrations/home-hero.png"
           alt="homepage educator illustration"
           draggable={false}
