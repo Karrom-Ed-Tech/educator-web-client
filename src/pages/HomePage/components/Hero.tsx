@@ -18,16 +18,20 @@ export default function Hero() {
           </p>
         </div>
 
-        <div className="flex w-full justify-center">
+        <form action="/register" className="flex w-full justify-center">
           <input
             type="text"
+            name="email"
             placeholder="Enter your email"
             className="bg-transparent border-b border-front p-5 w-3/5"
           />
-          <button className="text-sm font-medium bg-foreground text-back px-8 border border-foreground duration-300 hover:bg-transparent hover:text-front">
+          <button
+            type="submit"
+            className="text-sm font-medium bg-foreground text-back px-8 border border-foreground duration-300 hover:bg-transparent hover:text-front"
+          >
             Sign up
           </button>
-        </div>
+        </form>
       </div>
 
       <div className="basis-1/2 h-full">
