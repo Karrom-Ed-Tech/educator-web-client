@@ -7,7 +7,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <JoinRevolution/>
+      <JoinRevolution />
       <GoodFit />
       <HowToApply />
     </>
