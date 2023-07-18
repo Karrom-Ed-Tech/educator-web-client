@@ -18,18 +18,22 @@ export default function Hero() {
           </p>
         </div>
 
-        {/* <div className="absolute mt-96 before:content-visible before:bg-opacity-50 before:h-full before:left-1/2 before:top-0 before:-translate-x-1/2 before:bg-primary before:absolute before:-z-1 before:blur-3xl before:aspect-square">
-        </div> */}
-        <div className="flex w-full justify-center">
+        <div className="absolute mt-96 before:content-visible before:bg-opacity-50 before:h-full before:left-1/2 before:top-0 before:-translate-x-1/2 before:bg-primary before:absolute before:-z-1 before:blur-3xl before:aspect-square">
+        </div>
+        <form action="/register" className="flex w-full justify-center">
           <input
             type="text"
+            name="email"
             placeholder="Enter your email"
             className="bg-transparent border-b border-front p-5 w-3/5"
           />
-          <button className="text-sm font-medium bg-foreground text-back px-8 border border-foreground duration-300 hover:bg-transparent hover:text-front">
+          <button
+            type="submit"
+            className="text-sm font-medium bg-foreground text-back px-8 border border-foreground duration-300 hover:bg-transparent hover:text-front"
+          >
             Sign up
           </button>
-        </div>
+        </form>
       </div>
 
       <div className="basis-1/2 widescreen:basis-1 widescreen:w-96 widescreen:h-96 widescreen:mt-16 widescreen:flex widescreen:items-center widescreen:justify-center">

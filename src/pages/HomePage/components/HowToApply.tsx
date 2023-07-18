@@ -55,7 +55,7 @@ export default function HowToApply() {
               >
                 <MaterialIcon
                   codepoint="e5e1"
-                  className="absolute right-0 translate-x-full top-1/2 -translate-y-1/2"
+                  className="absolute selection:hidden pointer-events-none right-0 translate-x-full top-1/2 -translate-y-1/2"
                 />
               </div>
             )}
@@ -63,7 +63,7 @@ export default function HowToApply() {
         ))}
       </div>
 
-      <p className="mt-16 shadow-md p-5 rounded-full text-primary brightness-75">
+      <p className="mt-16 shadow-md p-5 rounded-full text-primary brightness-75 pointer-events-none selection:hidden">
         Your application will be verified by our admins
       </p>
     </section>
