@@ -18,8 +18,8 @@ export default function Hero() {
           </p>
         </div>
 
-        <div className="absolute mt-96 before:content-visible before:bg-opacity-50 before:h-full before:left-1/2 before:top-0 before:-translate-x-1/2 before:bg-primary before:absolute before:-z-1 before:blur-3xl before:aspect-square">
-        </div>
+        {/* <div className="absolute mt-96 before:content-visible before:bg-opacity-50 before:h-full before:left-1/2 before:top-0 before:-translate-x-1/2 before:bg-primary before:absolute before:-z-1 before:blur-3xl before:aspect-square">
+        </div> */}
         <div className="absolute h-36 w-36 bg-primary -z-1 mt-72 blur-3xl opacity-50">
 
         </div>

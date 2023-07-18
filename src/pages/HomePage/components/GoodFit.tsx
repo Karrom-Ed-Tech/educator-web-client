@@ -12,7 +12,7 @@ const checkpoints = [
 export default function GoodFit() {
   return (
     <section className="flex p-page py-36 items-center widescreen:flex-col-reverse widescreen:py-12 widescreen:justify-center widescreen:w-full mobile:w-11/12 ">
-      <div className="basis-1/2 widescreen:basis-1 widescreen:w-full">
+      <div className="basis-1/2 widescreen:basis-1 widescreen:w-11/12 ">
         <h1 className="text-6xl w-9/12 font-medium widescreen:text-4xl widescreen:w-full">
           How do I know
           if I'm a good fit

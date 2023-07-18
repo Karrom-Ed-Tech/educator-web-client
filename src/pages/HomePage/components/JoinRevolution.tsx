@@ -2,12 +2,12 @@ export default function JoinRevolution() {
   return (
     <div className="flex flex-col items-start p-page py-20 bg-primary bg-opacity-10 mt-20 font-medium">
     <div>
-        <div className="text-4xl leading-tight font-raleway">
+        <div className="text-4xl leading-tight font-raleway widescreen:mx-5">
             Want to be a part of the <span className="text-primary font-extrabold">REVOLUTION</span> ?
         </div>
     </div>
-    <div className="flex flex-row-reverse items-center justify-between mt-16 w-full font-extralight widescreen:flex-col-reverse">
-    <div className="basis-1/2  widescreen:mt-7">
+    <div className="flex flex-row-reverse items-center justify-between mt-16 w-full font-extralight widescreen:flex-col-reverse widescreen:">
+    <div className="basis-1/2  widescreen:mt-7 widescreen:w-11/12 ">
     Karrom is an online learning platform for students 5-18. We produce on-demand teaching videos in various subject areas .<br/>
     We are building our team of talented teachers. If you have a passion for teaching and are ready for talent to reach thousands.
 
