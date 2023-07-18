@@ -37,7 +37,7 @@ export default function Hero() {
         </form>
       </div>
 
-      <div className="basis-1/2 widescreen:basis-1 widescreen:w-96 widescreen:h-96 widescreen:mt-16 widescreen:flex widescreen:items-center widescreen:justify-center">
+      <div className="basis-1/2 widescreen:basis-1 widescreen:w-96 widescreen:h-96 widescreen:mt-16 widescreen:flex widescreen:items-center widescreen:justify-start">
         <img
           className="object-contain h-inherit"
           src="/images/illustrations/home-hero.png"
