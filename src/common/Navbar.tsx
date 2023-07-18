@@ -20,7 +20,7 @@ function Navbar() {
         <span className="text-primary">o</span>m
       </Link>
 
-      <div className={`flex-1 flex justify-center gap-x-12 mobile:${open ? "" : "hidden"} mobile:flex-col mobile:absolute mobile:w-11/12 mobile:top-24 mobile:gap-y-3 mobile:text-3xl mobile:py-10 mobile:px-5 mobile:bg-black mobile:text-white mobile:bg-opacity-80 rounded-b-md`}>
+      <div className={`flex-1 flex justify-center gap-x-12 mobile:${open ? "" : "hidden"} mobile:flex-col mobile:absolute mobile:w-11/12 mobile:top-24 mobile:gap-y-3 mobile:text-3xl mobile:py-10 mobile:px-5 mobile:bg-black mobile:text-white mobile:bg-opacity-80 rounded-bl-md`}>
   {navItems.map((item, i) => (
     <Link key={i} to={item.to} className="text-sm tracking-tight hover:bg-black mobile:py-5 mobile:px-3 ease-in duration-200 rounded-md">
       {item.title}
