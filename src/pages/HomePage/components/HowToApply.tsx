@@ -25,7 +25,7 @@ export default function HowToApply() {
         Follow these 3 simple steps
       </h2>
 
-      <div className="py-12 flex relative justify-center w-full mobile:flex mobile:flex-col mobile:items-center mobile:justify-center">
+      <div className="py-12 flex relative justify-center w-full mobile:flex-col mobile:items-center">
         <img
           src="https://i.pinimg.com/originals/10/f4/c2/10f4c29e4f0c7a53cc7b7ca4822e82d9.png"
           alt="question mark"

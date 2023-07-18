@@ -20,9 +20,7 @@ export default function Hero() {
 
         {/* <div className="absolute mt-96 before:content-visible before:bg-opacity-50 before:h-full before:left-1/2 before:top-0 before:-translate-x-1/2 before:bg-primary before:absolute before:-z-1 before:blur-3xl before:aspect-square">
         </div> */}
-        <div className="absolute h-36 w-36 bg-primary -z-1 mt-72 blur-3xl opacity-50">
-
-        </div>
+        <div className="absolute h-36 w-36 bg-primary -z-1 mt-72 blur-3xl opacity-50"></div>
         <form action="/register" className="flex w-full justify-center">
           <input
             type="text"
@@ -39,7 +37,7 @@ export default function Hero() {
         </form>
       </div>
 
-      <div className="basis-1/2 widescreen:basis-1 widescreen:w-96 widescreen:h-96 widescreen:mt-16 widescreen:flex widescreen:items-center widescreen:justify-center">
+      <div className="basis-1/2 widescreen:basis-1 widescreen:w-96 widescreen:h-96 widescreen:mt-16 widescreen:flex widescreen:items-center widescreen:justify-start">
         <img
           className="object-contain h-inherit"
           src="/images/illustrations/home-hero.png"
