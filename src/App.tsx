@@ -9,6 +9,7 @@ import Footer from "./common/Footer";
 import Navbar from "./common/Navbar";
 import HomePage from "./pages/HomePage/HomePage";
 import { GlobalContextProvider } from "./contexts/globalContext";
+import ScrollToTop from "./common/ScrollToTop";
 
 export default function App() {
   const router = createBrowserRouter(
@@ -38,6 +39,8 @@ function Root() {
       <Navbar />
       <Outlet />
       <Footer />
+
+      <ScrollToTop />
     </main>
   );
 }
