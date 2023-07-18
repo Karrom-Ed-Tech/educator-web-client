@@ -1,8 +1,8 @@
 export default function Hero() {
   return (
-    <section className="flex p-page widescreen:flex-col-reverse widescreen:justify-center widescreen:items-center">
-      <div className="basis-1/2 flex flex-col justify-center items-center gap-y-16 widscreen:basis-1">
-        <h1 className="text-7xl leading-tight font-raleway widescreen:text-5xl widescreen:mt-20">
+    <section className="flex p-page mobile:flex-col-reverse mobile:items-center">
+      <div className="basis-1/2 flex flex-col justify-center items-center gap-y-16 mobile:items-stretch">
+        <h1 className="text-7xl leading-tight font-raleway mobile:text-5xl mobile:mt-20">
           Online{" "}
           <span className="font-medium font-poppins">
             classes <br /> made fun for
@@ -10,7 +10,7 @@ export default function Hero() {
           <br /> educators
         </h1>
 
-        <div className="w-1/2 widescreen:w-11/12">
+        <div className="w-1/2 mobile:w-11/12">
           <h3 className="font-serif font-semibold mb-3">Introduction</h3>
           <p className="text-lg font-light">
             Get rid of the routine feel from your teaching process. Join Karrom
@@ -26,18 +26,18 @@ export default function Hero() {
             type="text"
             name="email"
             placeholder="Enter your email"
-            className="bg-transparent border-b border-front p-5 w-3/5"
+            className="bg-transparent border-b border-front p-5 w-3/5 mobile:w-full"
           />
           <button
             type="submit"
-            className="text-sm font-medium bg-foreground text-back px-8 border border-foreground duration-300 hover:bg-transparent hover:text-front"
+            className="text-sm font-medium bg-foreground text-back px-8 border border-foreground duration-300 hover:bg-transparent hover:text-front mobile:whitespace-nowrap"
           >
             Sign up
           </button>
         </form>
       </div>
 
-      <div className="basis-1/2 widescreen:basis-1 widescreen:w-96 widescreen:h-96 widescreen:mt-16 widescreen:flex widescreen:items-center widescreen:justify-start">
+      <div className="basis-1/2 mobile:">
         <img
           className="object-contain h-inherit"
           src="/images/illustrations/home-hero.png"
