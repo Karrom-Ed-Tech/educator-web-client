@@ -21,7 +21,7 @@ function Navbar() {
       </Link>
 
       <div
-        className={`flex-1 flex justify-center gap-x-12 ${!open && "mobile:hidden"} mobile:flex-col mobile:absolute mobile:w-11/12 mobile:top-24 mobile:gap-y-3 mobile:text-3xl mobile:py-10 mobile:px-5 mobile:bg-black mobile:text-white mobile:bg-opacity-80 rounded-bl-md`}
+        className={`flex-1 flex justify-center gap-x-12 ${!open && "mobile:hidden"} mobile:flex-col mobile:absolute mobile:w-11/12 mobile:top-24 mobile:gap-y-3 mobile:text-3xl mobile:py-10 mobile:px-5 mobile:bg-black mobile:text-white mobile:bg-opacity-80 rounded-bl-lg`}
       >
         {navItems.map((item, i) => (
           <Link

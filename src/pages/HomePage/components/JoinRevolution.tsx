@@ -21,7 +21,7 @@ export default function JoinRevolution() {
           </button>
         </div>
 
-        <div className="w-6/12 mr-10 widescreen:w-11/12 shadow-lg widescreen:mr-0">
+        <div className="w-6/12 mr-10 widescreen:w-full shadow-lg widescreen:mr-0">
           {/* <img src="/images/dance-teach.jpg" className=" border-secondary"/> */}
           <video
             className="w-full rounded-lg border-r-4 border-b-4 border-primary"
