@@ -11,8 +11,7 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
         name: "name",
         title: "Educator name",
         placeholder: "e.g: Sunil Kumar",
-        constraints: { minLength: 5 },
-        optional: true,
+        constraints: { minLength: 5 }
       },
       {
         name: "isAcademy",
@@ -24,16 +23,14 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
         name: "email",
         title: "Email address for verificiation!",
         placeholder:"Email address for verification",
-        type: "email",
-        optional: true,
+        type: "email"
 
       },
       {
         name: "mobile",
         title: "Phone number",
         placeholder: "Mobile number for first point of contact",
-        constraints: { pattern: `^(0|91)?[6-9][0-9]{9}$` },
-        optional: true,
+        constraints: { pattern: `^(0|91)?[6-9][0-9]{9}$` }
       },
     ],
   },
