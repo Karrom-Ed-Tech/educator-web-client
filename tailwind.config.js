@@ -5,6 +5,7 @@ export default {
     extend: {
       screens: {
         mobile: { max: "780px" },
+        "mobile-min": { min: "780px" },
         widescreen: { min: "780px" },
       },
       colors: {

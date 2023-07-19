@@ -49,7 +49,7 @@ export default function RegistrationInput(props: RegistrationInputProps) {
   return (
     <div
       className={twMerge(
-        "relative flex items-center py-4 px-6 border-2 border-front border-opacity-20",
+        "relative flex items-center py-4 px-6 border-2 border-front border-opacity-20 mobile:flex-col mobile:items-start",
         selectedOnce &&
           !inputRef.current.checkValidity() &&
           "border-red-500 border-opacity-75",
@@ -64,8 +64,8 @@ export default function RegistrationInput(props: RegistrationInputProps) {
         name={props.name}
         placeholder={props.placeholder}
         className={twMerge(
-          "flex-1 outline-none selection:outline-none px-6",
-          props.type === "checkbox" && "flex-none ml-5 w-5 h-5"
+          "flex-1 outline-none selection:outline-none px-6 mobile:ml-0 mobile:mt-5 mobile:px-0 mobile:w-full",
+          props.type === "checkbox" && "flex-none ml-5 w-5 h-5 mobile:ml-0"
         )}
         style={{ "--title-text": `"${props.title}"` } as React.CSSProperties}
         onChange={props.onChange}
