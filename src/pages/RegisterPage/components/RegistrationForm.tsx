@@ -31,7 +31,7 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
     title: "Authentication",
     inputs: [
       {
-        name: "name",
+        name: "namadse",
         title: "Educator / Academy name",
       },
     ],
@@ -40,7 +40,7 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
     title: "Additional Info",
     inputs: [
       {
-        name: "name",
+        name: "naasdme",
         title: "Educator / Academy name",
       },
     ],
@@ -49,7 +49,7 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
     title: "Academy Details",
     inputs: [
       {
-        name: "name",
+        name: "namdadsade",
         title: "Educator / Academy name",
       },
     ],
@@ -59,6 +59,7 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
 export default function RegistrationForm() {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<object>({});
+  const [errorCheckFlag, setErrorCheckFlag] = useState(false);
 
   const currentFormRef = useRef() as React.MutableRefObject<HTMLFormElement>;
 
@@ -70,8 +71,11 @@ export default function RegistrationForm() {
         step < formSteps.length - 1 ? step + 1 : formSteps.length - 1
       );
     } else {
+      setErrorCheckFlag((f) => !f);
       // Do something when the form is not valid
-      alert("wrong");
+      setTimeout(() => {
+        setErrorCheckFlag((f) => !f);
+      }, 1);
     }
   }
 
@@ -137,6 +141,8 @@ export default function RegistrationForm() {
         {formSteps[currentStep].inputs.map((input, i) => (
           <RegistrationInput
             key={i}
+            errorCheckFlag={errorCheckFlag}
+            value={(formData as any)[input.name]}
             {...input}
             onChange={(event) => {
               setFormData((prev) => ({

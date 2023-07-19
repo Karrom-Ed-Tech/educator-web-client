@@ -18,13 +18,33 @@ export interface RegistrationInputProps {
     pattern?: string;
   };
   errorCheckFlag?: boolean;
+  value?: any;
 }
 
 export default function RegistrationInput(props: RegistrationInputProps) {
   const inputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
   const [selectedOnce, setSelectedOnce] = useState(false);
+  const [shake, setShake] = useState(false);
 
-  useEffect(() => {}, [props.errorCheckFlag]);
+  useEffect(() => {
+    setTimeout(() => {
+      setShake(false);
+    }, 800);
+  }, [shake]);
+
+  useEffect(() => {
+    if (props.errorCheckFlag) {
+      setSelectedOnce(true);
+      setShake(!inputRef.current.checkValidity());
+    }
+  }, [props.errorCheckFlag]);
+
+  useEffect(() => {
+    if (props.value) {
+      inputRef.current.value = props.value;
+      setSelectedOnce(true);
+    }
+  }, []);
 
   return (
     <div
@@ -32,7 +52,8 @@ export default function RegistrationInput(props: RegistrationInputProps) {
         "relative flex items-center py-4 px-6 border-2 border-front border-opacity-20",
         selectedOnce &&
           !inputRef.current.checkValidity() &&
-          "border-red-500 border-opacity-75"
+          "border-red-500 border-opacity-75",
+        shake && "animate-[error-shake_200ms_infinite]"
       )}
     >
       <p className="font-semibold">{props.title}</p>
