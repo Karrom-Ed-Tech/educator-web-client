@@ -11,17 +11,17 @@ const checkpoints = [
 
 export default function GoodFit() {
   return (
-    <section className="flex p-page py-14 items-center widescreen:flex-col-reverse widescreen:py-12 widescreen:justify-center widescreen:w-full mobile:w-11/12 ">
-      <div className="basis-1/2 widescreen:basis-1 widescreen:w-11/12 ">
-        <h1 className="text-6xl w-9/12 font-medium widescreen:text-4xl widescreen:w-full">
+    <section className="flex p-page py-14 items-center mobile:flex-col-reverse mobile:py-12 mobile:justify-center mobile:w-full mobile:w-11/12 ">
+      <div className="basis-1/2 mobile:basis-1 mobile:w-11/12 ">
+        <h1 className="text-6xl w-9/12 font-medium mobile:text-4xl mobile:w-full">
           How do I know if I'm a good fit for{" "}
           <span className="text-primary">Karrom</span>?
         </h1>
-        <ul className="my-8 flex flex-col gap-y-3 widescreen:flex-wrap">
+        <ul className="my-8 flex flex-col gap-y-3 mobile:flex-wrap">
           {checkpoints.map((point, i) => (
             <li
               key={i}
-              className="flex items-center text-lg font-light tracking-tight whitespace-nowrap widescreen:w-full widescreen:items-start widescreen:whitespace-normal"
+              className="flex items-center text-lg font-light tracking-tight whitespace-nowrap mobile:w-full mobile:items-start mobile:whitespace-normal"
             >
               <MaterialIcon
                 codepoint="e838"
@@ -33,7 +33,7 @@ export default function GoodFit() {
         </ul>
       </div>
 
-      <div className="basis-1/2 widescreen:w-11/12 widescreen:h-11/12 widescreen:basis-1 widescreen:flex widescreen:items:center widescreen:justify-center">
+      <div className="basis-1/2 mobile:w-11/12 mobile:h-11/12 mobile:basis-1 mobile:flex mobile:items:center mobile:justify-center">
         <img
           src="/images/illustrations/good-teacher.png"
           alt="good fit teacher violin"

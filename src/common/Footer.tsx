@@ -16,9 +16,9 @@ const socials = [
 
 export default function Footer() {
   return (
-    <section className="p-page flex py-12 overflow-hidden relative mt-5 widescreen:flex-col-reverse">
-      <div className="absolute top-0 left-0 w-[70%] bg-secondary -translate-x-[30%] rounded-full aspect-square -z-1 widescreen:mt-96 widescreen:w-[150vw] widescreen:h-128" />
-      <div className="basis-1/2 flex flex-col gap-y-6 text-back widescreen:mt-32">
+    <section className="p-page flex py-12 overflow-hidden relative mt-5 mobile:flex-col-reverse">
+      <div className="absolute top-0 left-0 w-[70%] bg-secondary -translate-x-[30%] rounded-full aspect-square -z-1 mobile:mt-96 mobile:w-[150vw] mobile:h-128" />
+      <div className="basis-1/2 flex flex-col gap-y-6 text-back mobile:mt-32">
         <Link to="/" className="text-3xl font-bold w-max">
           Karrom
         </Link>

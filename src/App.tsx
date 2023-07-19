@@ -32,7 +32,7 @@ export default function App() {
 function Root() {
   return (
     <main className="relative">
-      {/* <article className="z-[999999] widescreen:hidden fixed top-0 left-0 w-full h-full flex items-center justify-center italic text-lg bg-background text-center">
+      {/* <article className="z-[999999] mobile:hidden fixed top-0 left-0 w-full h-full flex items-center justify-center italic text-lg bg-background text-center">
         Coming soon to mobile
         <br /> Meanwhile please visit us on our desktop site
       </article> */}

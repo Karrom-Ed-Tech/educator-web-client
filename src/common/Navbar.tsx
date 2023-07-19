@@ -21,7 +21,9 @@ function Navbar() {
       </Link>
 
       <div
-        className={`flex-1 flex justify-center gap-x-12 ${!open && "mobile:hidden"} mobile:flex-col mobile:absolute mobile:w-11/12 mobile:top-24 mobile:gap-y-3 mobile:text-3xl mobile:py-10 mobile:px-5 mobile:bg-black mobile:text-white mobile:bg-opacity-80 rounded-bl-lg`}
+        className={`flex-1 flex justify-center gap-x-12 ${
+          !open && "mobile:hidden"
+        } mobile:flex-col mobile:absolute mobile:w-11/12 mobile:top-24 mobile:gap-y-3 mobile:text-3xl mobile:py-10 mobile:px-5 mobile:bg-black mobile:text-white mobile:bg-opacity-80 rounded-bl-lg`}
       >
         {navItems.map((item, i) => (
           <Link
@@ -38,14 +40,14 @@ function Navbar() {
         <div>
           <Link
             to="/register"
-            className="p-3 px-5 border text-sm font-medium border-front duration-300 hover:bg-front hover:text-back widescreen:mr-5"
+            className="p-3 px-5 border text-sm font-medium border-front duration-300 hover:bg-front hover:text-back mobile:mr-5"
           >
             Get Started
           </Link>
         </div>
 
         <div
-          className="mobile-min:hidden cursor-pointer scale-125 "
+          className="widescreen:hidden cursor-pointer scale-125 "
           onClick={toggleNav}
         >
           {open ? (

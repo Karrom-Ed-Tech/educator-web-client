@@ -7,8 +7,8 @@ export default function JoinRevolution() {
           <span className="text-primary font-extrabold">REVOLUTION</span> ?
         </div>
       </div>
-      <div className="flex flex-row-reverse items-center justify-between mt-16 w-full font-extralight widescreen:flex-col-reverse">
-        <div className="basis-1/2  widescreen:mt-7">
+      <div className="flex flex-row-reverse items-center justify-between mt-16 w-full font-extralight mobile:flex-col-reverse">
+        <div className="basis-1/2  mobile:mt-7">
           Karrom is an online learning platform for students 5-18. We produce
           on-demand teaching videos in various subject areas .<br />
           We are building our team of talented teachers. If you have a passion
@@ -21,7 +21,7 @@ export default function JoinRevolution() {
           </button>
         </div>
 
-        <div className="w-6/12 mr-10 widescreen:w-full shadow-lg widescreen:mr-0">
+        <div className="w-6/12 mr-10 mobile:w-full shadow-lg mobile:mr-0">
           {/* <img src="/images/dance-teach.jpg" className=" border-secondary"/> */}
           <video
             className="w-full rounded-lg border-r-4 border-b-4 border-primary"
