@@ -1,43 +1,78 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import MaterialIcon from "../../../common/MaterialIcon";
+import { twMerge } from "tailwind-merge";
 
-interface RegistrationInputProps {
-  placeholder: string;
-  icon: string;
+export interface RegistrationInputProps {
+  title: string;
   name: string;
-  password?: boolean;
-  showPasswordToggle?: boolean;
+  placeholder?: string;
+  type?: React.HTMLInputTypeAttribute;
   autoComplete?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  optional?: boolean;
+  constraints?: {
+    min?: number;
+    max?: number;
+    minLength?: number;
+    maxLength?: number;
+    pattern?: string;
+  };
+  errorCheckFlag?: boolean;
 }
 
 export default function RegistrationInput(props: RegistrationInputProps) {
-  const [type, setType] = useState(props.password ? "password" : "text");
+  const inputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+  const [selectedOnce, setSelectedOnce] = useState(false);
+
+  useEffect(() => {}, [props.errorCheckFlag]);
 
   return (
-    <div className="flex w-[25vw] items-center gap-x-2 rounded-lg border-2 border-foreground border-opacity-40 p-2 focus-within:border-primary">
-      <MaterialIcon className="text-3xl" codepoint={props.icon} />
+    <div
+      className={twMerge(
+        "relative flex items-center py-4 px-6 border-2 border-front border-opacity-20",
+        selectedOnce &&
+          !inputRef.current.checkValidity() &&
+          "border-red-500 border-opacity-75"
+      )}
+    >
+      <p className="font-semibold">{props.title}</p>
       <input
         autoComplete={props.autoComplete}
-        type={type}
+        ref={inputRef}
+        type={props.type || "text"}
         name={props.name}
         placeholder={props.placeholder}
-        className="flex-1 border-none bg-transparent outline-none focus:outline-none"
+        className={twMerge(
+          "flex-1 outline-none selection:outline-none px-6",
+          props.type === "checkbox" && "flex-none ml-5 w-5 h-5"
+        )}
+        style={{ "--title-text": `"${props.title}"` } as React.CSSProperties}
         onChange={props.onChange}
+        required={!props.optional}
+        {...props.constraints}
+        onBlur={() => {
+          inputRef.current.value.length && setSelectedOnce(true);
+        }}
       />
-      {props.password && props.showPasswordToggle && (
-        <button
-          className=""
-          type="button"
-          onClick={() => setType(type === "password" ? "text" : "password")}
-        >
-          {type === "password" ? (
-            <MaterialIcon className="text-3xl" codepoint="e8f4" />
-          ) : (
-            <MaterialIcon className="text-3xl" codepoint="e8f5" />
-          )}
-        </button>
-      )}
+
+      {selectedOnce &&
+        (inputRef.current.checkValidity() ? (
+          <MaterialIcon
+            codepoint="e876"
+            className={twMerge(
+              "text-primary",
+              (false || props.type === "checkbox") && "hidden"
+            )}
+          />
+        ) : (
+          <div className="flex flex-col items-center text-red-500 bg-background absolute top-0 left-1 -translate-y-1/2 px-2">
+            <p className="text-xs">{inputRef.current.validationMessage}</p>
+          </div>
+        ))}
+
+      {/* <div className="absolute px-1 top-0 left-2 text-xs text-front -translate-y-1/2 bg-background z-1 peer-focus:text-primary">
+        {props.title}
+      </div> */}
     </div>
   );
 }

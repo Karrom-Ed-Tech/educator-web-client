@@ -1,29 +1,79 @@
-import { FormEventHandler, ReactNode, useState } from "react";
-import RegistrationInput from "./RegistrationInput";
+import { FormEventHandler, ReactNode, useRef, useState } from "react";
+import RegistrationInput, { RegistrationInputProps } from "./RegistrationInput";
 import MaterialIcon from "../../../common/MaterialIcon";
 import { twMerge } from "tailwind-merge";
 
-const formSteps: { title: string; element: ReactNode }[] = [
+const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
   {
     title: "Basic Details",
-    element: <div />,
+    inputs: [
+      {
+        name: "name",
+        title: "Educator / Academy name",
+        placeholder: "e.g: Eras Dance Academy / Sunil Kumar",
+        constraints: { minLength: 5 },
+      },
+      {
+        name: "isAcademy",
+        title: "Is this an academy with multiple educators?",
+        type: "checkbox",
+        optional: true,
+      },
+      {
+        name: "mobile",
+        title: "Phone number",
+        placeholder: "Mobile number for first point of contact",
+        constraints: { pattern: `^(0|91)?[6-9][0-9]{9}$` },
+      },
+    ],
   },
   {
     title: "Authentication",
-    element: <div />,
+    inputs: [
+      {
+        name: "name",
+        title: "Educator / Academy name",
+      },
+    ],
   },
   {
     title: "Additional Info",
-    element: <div />,
+    inputs: [
+      {
+        name: "name",
+        title: "Educator / Academy name",
+      },
+    ],
   },
   {
     title: "Academy Details",
-    element: <div />,
+    inputs: [
+      {
+        name: "name",
+        title: "Educator / Academy name",
+      },
+    ],
   },
 ];
 
 export default function RegistrationForm() {
-  const [currentStep, setCurrentStep] = useState(2);
+  const [currentStep, setCurrentStep] = useState(0);
+  const [formData, setFormData] = useState<object>({});
+
+  const currentFormRef = useRef() as React.MutableRefObject<HTMLFormElement>;
+
+  function nextStepHandler() {
+    const isFormValid = currentFormRef.current.checkValidity();
+
+    if (isFormValid) {
+      setCurrentStep((step) =>
+        step < formSteps.length - 1 ? step + 1 : formSteps.length - 1
+      );
+    } else {
+      // Do something when the form is not valid
+      alert("wrong");
+    }
+  }
 
   return (
     <form className="min-h-[50vh] flex flex-col p-page py-12">
@@ -80,23 +130,35 @@ export default function RegistrationForm() {
         })}
       </div>
 
-      <div className="flex-1"></div>
+      <form
+        ref={currentFormRef}
+        className="flex-1 flex flex-col items-stretch px-[6vw] gap-y-8 py-16"
+      >
+        {formSteps[currentStep].inputs.map((input, i) => (
+          <RegistrationInput
+            key={i}
+            {...input}
+            onChange={(event) => {
+              setFormData((prev) => ({
+                ...prev,
+                [input.name]: event.target.value,
+              }));
+            }}
+          />
+        ))}
+      </form>
 
       <div className="flex justify-between p-5">
-        <button
-          type="button"
-          onClick={() => setCurrentStep((step) => (step > 1 ? step - 1 : 0))}
-        >
-          Back
-        </button>
-        <button
-          type="button"
-          onClick={() =>
-            setCurrentStep((step) =>
-              step < formSteps.length - 1 ? step + 1 : formSteps.length - 1
-            )
-          }
-        >
+        {currentStep !== 0 && (
+          <button
+            type="button"
+            onClick={() => setCurrentStep((step) => (step > 1 ? step - 1 : 0))}
+          >
+            Back
+          </button>
+        )}
+        <div className="flex-1" />
+        <button type="button" onClick={nextStepHandler}>
           Next
         </button>
       </div>
