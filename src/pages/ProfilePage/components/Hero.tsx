@@ -19,7 +19,7 @@ export default function Hero() {
           </div>
         </div>
         <div className="text-xs text-gray-500">sunilkumar123@gmail.com</div>
-        <div className="tracking-widest text-xs mt-5 text-gray-400">RATING</div>
+        {/* <div className="tracking-widest text-xs mt-5 text-gray-400">RATING</div>
         <div className="flex items-center mt-3">
           <div className="text-l opacity-70 flex">
             {[1, 2, 3, 4, 5].map((item, idx) => {
@@ -31,7 +31,7 @@ export default function Hero() {
             5/5
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="tracking-widest text-xs text-gray-400 mt-5">Website</div>
         <div className="flex items-center mt-3">
           <div className="text-md opacity-70 basis-1/4">Want to know what we do?</div>

@@ -27,12 +27,14 @@ export default function AdditionalDetails() {
       
       <DetailItem title="Affiliation Proof" content="View" view={true} />
 
-      <div className="my-10">
+     <DetailItem title="Activities" tags={['Classical Dance' , 'Western Dance']} />
+     <DetailItem title="Tour of the institute" video="https://www.youtube.com/watch?v=QdLLjDbi75A" />
+      <div className="text-center my-20">
         <Link
           to="/register"
           className="p-3 px-5 border text-sm font-medium border-front duration-300 hover:bg-front hover:text-back"
         >
-          Verify
+          Verify Educator
         </Link>
       </div>
     </div>
