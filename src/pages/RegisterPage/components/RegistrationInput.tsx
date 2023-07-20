@@ -16,7 +16,9 @@ export interface RegistrationInputProps {
     minLength?: number;
     maxLength?: number;
     pattern?: string;
+    accept?: string;
   };
+  preview?: boolean;
   errorCheckFlag?: boolean;
   value?: any;
 }
@@ -47,53 +49,56 @@ export default function RegistrationInput(props: RegistrationInputProps) {
   }, []);
 
   return (
-    <div
-      className={twMerge(
-        "relative flex items-center py-4 px-6 border-2 border-front border-opacity-20 mobile:flex-col mobile:items-start",
-        selectedOnce &&
-          !inputRef.current.checkValidity() &&
-          "border-red-500 border-opacity-75",
-        shake && "animate-[error-shake_200ms_infinite]"
-      )}
-    >
-      <p className="font-semibold">{props.title}</p>
-      <input
-        autoComplete={props.autoComplete}
-        ref={inputRef}
-        type={props.type || "text"}
-        name={props.name}
-        placeholder={props.placeholder}
+    <>
+      {props.preview && <img src={inputRef.current.value} />}
+      <div
         className={twMerge(
-          "flex-1 outline-none selection:outline-none px-6 mobile:ml-0 mobile:mt-5 mobile:px-0 mobile:w-full",
-          props.type === "checkbox" && "flex-none ml-5 w-5 h-5 mobile:ml-0"
+          "relative flex items-center py-4 px-6 border-2 border-front border-opacity-20 mobile:flex-col mobile:items-start",
+          selectedOnce &&
+            !inputRef.current.checkValidity() &&
+            "border-red-500 border-opacity-75",
+          shake && "animate-[error-shake_200ms_infinite]"
         )}
-        style={{ "--title-text": `"${props.title}"` } as React.CSSProperties}
-        onChange={props.onChange}
-        required={!props.optional}
-        {...props.constraints}
-        onBlur={() => {
-          inputRef.current.value.length && setSelectedOnce(true);
-        }}
-      />
+      >
+        <p className="font-semibold">{props.title}</p>
+        <input
+          autoComplete={props.autoComplete}
+          ref={inputRef}
+          type={props.type || "text"}
+          name={props.name}
+          placeholder={props.placeholder}
+          className={twMerge(
+            "flex-1 outline-none selection:outline-none px-6 mobile:ml-0 mobile:mt-5 mobile:px-0 mobile:w-full",
+            props.type === "checkbox" && "flex-none ml-5 w-5 h-5 mobile:ml-0"
+          )}
+          style={{ "--title-text": `"${props.title}"` } as React.CSSProperties}
+          onChange={props.onChange}
+          required={!props.optional}
+          {...props.constraints}
+          onBlur={() => {
+            inputRef.current.value.length && setSelectedOnce(true);
+          }}
+        />
 
-      {selectedOnce &&
-        (inputRef.current.checkValidity() ? (
-          <MaterialIcon
-            codepoint="e876"
-            className={twMerge(
-              "text-primary",
-              (false || props.type === "checkbox") && "hidden"
-            )}
-          />
-        ) : (
-          <div className="flex flex-col items-center text-red-500 bg-background absolute top-0 left-1 -translate-y-1/2 px-2">
-            <p className="text-xs">{inputRef.current.validationMessage}</p>
-          </div>
-        ))}
+        {selectedOnce &&
+          (inputRef.current.checkValidity() ? (
+            <MaterialIcon
+              codepoint="e876"
+              className={twMerge(
+                "text-primary",
+                (false || props.type === "checkbox") && "hidden"
+              )}
+            />
+          ) : (
+            <div className="flex flex-col items-center text-red-500 bg-background absolute top-0 left-1 -translate-y-1/2 px-2">
+              <p className="text-xs">{inputRef.current.validationMessage}</p>
+            </div>
+          ))}
 
-      {/* <div className="absolute px-1 top-0 left-2 text-xs text-front -translate-y-1/2 bg-background z-1 peer-focus:text-primary">
+        {/* <div className="absolute px-1 top-0 left-2 text-xs text-front -translate-y-1/2 bg-background z-1 peer-focus:text-primary">
         {props.title}
       </div> */}
-    </div>
+      </div>
+    </>
   );
 }

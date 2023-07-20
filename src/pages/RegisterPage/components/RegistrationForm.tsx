@@ -1,4 +1,10 @@
-import { FormEventHandler, ReactNode, useRef, useState } from "react";
+import {
+  FormEventHandler,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import RegistrationInput, { RegistrationInputProps } from "./RegistrationInput";
 import MaterialIcon from "../../../common/MaterialIcon";
 import { twMerge } from "tailwind-merge";
@@ -11,7 +17,7 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
         name: "name",
         title: "Educator name",
         placeholder: "e.g: Sunil Kumar",
-        constraints: { minLength: 5 }
+        constraints: { minLength: 5 },
       },
       {
         name: "isAcademy",
@@ -20,29 +26,44 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
         optional: true,
       },
       {
-        name: "email",
-        title: "Email address for verificiation!",
-        placeholder:"Email address for verification",
-        type: "email"
-
-      },
-      {
         name: "mobile",
         title: "Phone number",
         placeholder: "Mobile number for first point of contact",
-        constraints: { pattern: `^(0|91)?[6-9][0-9]{9}$` }
+        constraints: { pattern: `^(0|91|\\+91)?[6-9][0-9]{9}$` },
+      },
+      {
+        name: "website",
+        title: "Website (if any)",
+        placeholder: "Personal website / Academy website",
+        type: "url",
+      },
+      {
+        name: "address",
+        title: "Full Address",
+        placeholder: "Including zipcode, city, street address",
+        constraints: {
+          minLength: 15,
+        },
+        type: "string",
       },
     ],
   },
   {
-    title: "Authentication",
+    title: "Password",
     inputs: [
       {
-        name: "verification",
-        placeholder: "e.g: 123456",
-        type:"number",
-        title: "Enter the verification code you received from us!",
-        constraints: { min: 100000, max: 999999},
+        name: "email",
+        title: "Email address for verificiation!",
+        placeholder: "Email address for verification",
+        type: "email",
+      },
+      {
+        name: "password",
+        placeholder: "Set a string password",
+        type: "password",
+        autoComplete: "password",
+        title: "Password",
+        constraints: { minLength: 6 },
         optional: true,
       },
     ],
@@ -51,27 +72,49 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
     title: "Additional Info",
     inputs: [
       {
-        name: "profile-pic",
-        title: "Profile picture",
-        type:"file",
-        optional:false
+        name: "image",
+        title: "Display Picture",
+        type: "file",
+        constraints: { accept: "image/*" },
+        preview: true,
       },
       {
         name: "experience",
         title: "How many years of experience do you have ?",
-        type:"number",
+        type: "number",
         constraints: { min: 0, max: 100 },
       },
       {
+        name: "qualification",
+        title: "Your Qualification",
+        placeholder: "e.g: BSc Chemistry / BTech CSE",
+        type: "string",
+      },
+      {
         name: "degree",
-        title: "Upload your degree!",
+        title: "Upload proof of qualification (degree / certificate)",
         type: "file",
+        constraints: {
+          accept:
+            "image/jpeg,image/png,application/pdf,application/msword,image/x-eps",
+        },
       },
       {
         name: "affliation",
-        title: "Affiliation to any institute?",
+        title: "Specify any institute you are affiliated with [optional]",
+        placeholder: "e.g: IIT Delhi, Mumbai University",
+        optional: true,
       },
-
+      {
+        name: "affliationProof",
+        type: "file",
+        title: "Upload proof of affiliation (if any)",
+        constraints: {
+          accept:
+            "image/jpeg,image/png,application/pdf,application/msword,image/x-eps",
+        },
+        optional: true,
+      },
     ],
   },
   {
@@ -80,43 +123,43 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
       {
         name: "name",
         title: "Name of the academy",
-        placeholder : "e.g: Eras Dance Academy",
+        placeholder: "e.g: Eras Dance Academy",
         constraints: { minLength: 5 },
       },
       {
         name: "Address Line 1",
         title: "Address Line 1",
-        placeholder : "e.g: 123, 4th Cross, 5th Main",
+        placeholder: "e.g: 123, 4th Cross, 5th Main",
         constraints: { minLength: 5 },
       },
       {
         name: "Address Line 2",
         title: "Address Line 2",
-        placeholder : "e.g: 123, 4th Cross, 5th Main",
+        placeholder: "e.g: 123, 4th Cross, 5th Main",
         constraints: { minLength: 5 },
       },
       {
         name: "City",
         title: "City",
-        placeholder : "e.g: Bangalore",
+        placeholder: "e.g: Bangalore",
         constraints: { minLength: 5 },
       },
       {
         name: "State",
         title: "State",
-        placeholder : "e.g: Karnataka",
+        placeholder: "e.g: Karnataka",
         constraints: { minLength: 5 },
       },
       {
         name: "Country",
         title: "Country",
-        placeholder : "e.g: India",
+        placeholder: "e.g: India",
         constraints: { minLength: 5 },
       },
       {
         name: "Pincode",
         title: "Pincode",
-        placeholder : "e.g: 560001",
+        placeholder: "e.g: 560001",
         constraints: { minLength: 5 },
       },
     ],
@@ -127,7 +170,7 @@ export default function RegistrationForm() {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<object>({});
   const [errorCheckFlag, setErrorCheckFlag] = useState(false);
-  const [profilePic, setProfilePic] = useState<File | null>(null);
+  const [updateFlag, setUpdateFlag] = useState(true);
 
   const currentFormRef = useRef() as React.MutableRefObject<HTMLFormElement>;
 
@@ -146,6 +189,18 @@ export default function RegistrationForm() {
       }, 1);
     }
   }
+
+  useEffect(() => {
+    if (!updateFlag) {
+      setTimeout(() => {
+        setUpdateFlag(true);
+      }, 20);
+    }
+  }, [updateFlag]);
+
+  useEffect(() => {
+    setUpdateFlag(false);
+  }, [currentStep]);
 
   return (
     <form className="min-h-[50vh] flex flex-col p-page py-12">
@@ -201,40 +256,12 @@ export default function RegistrationForm() {
           );
         })}
       </div>
-
-      <form
-        ref={currentFormRef}
-        className="flex-1 flex flex-col items-stretch px-[6vw] gap-y-8 py-16"
-      >
-        {formSteps[currentStep].inputs.map((input, i) => {
-          if (input.name === "profile-pic") {
-            return (
-              <div key={i} className="flex flex-col items-center">
-                {profilePic ? (
-                  <img
-                    src={URL.createObjectURL(profilePic)}
-                    alt="Profile Picture"
-                    className="w-32 h-32 rounded-full object-cover mb-4"
-                  />
-                ) : (
-                  <div className="w-32 h-32 bg-gray-300 rounded-full mb-4" />
-                )}
-                <RegistrationInput
-                  errorCheckFlag={errorCheckFlag}
-                  value={(formData as any)[input.name]}
-                  {...input}
-                  onChange={(event) => {
-                    setProfilePic(event.target.files?.[0] || null);
-                    setFormData((prev) => ({
-                      ...prev,
-                      [input.name]: event.target.value,
-                    }));
-                  }}
-                />
-              </div>
-            );
-          }
-          return (
+      {updateFlag && (
+        <form
+          ref={currentFormRef}
+          className="flex-1 flex flex-col items-stretch px-[6vw] gap-y-8 py-16"
+        >
+          {formSteps[currentStep].inputs.map((input, i) => (
             <RegistrationInput
               key={i}
               errorCheckFlag={errorCheckFlag}
@@ -247,9 +274,9 @@ export default function RegistrationForm() {
                 }));
               }}
             />
-          );
-        })}
-      </form>
+          ))}
+        </form>
+      )}
 
       <div className="flex justify-between p-5">
         {currentStep !== 0 && (
@@ -259,11 +286,15 @@ export default function RegistrationForm() {
             className="flex items-center gap-x-2 "
           >
             <MaterialIcon codepoint="e5c8" className="inline rotate-180" />
-            Back 
+            Back
           </button>
         )}
         <div className="flex-1" />
-        <button type="button" onClick={nextStepHandler} className="flex items-center gap-x-2">
+        <button
+          type="button"
+          onClick={nextStepHandler}
+          className="flex items-center gap-x-2"
+        >
           Next
           <MaterialIcon codepoint="e5c8" className="inline" />
         </button>
