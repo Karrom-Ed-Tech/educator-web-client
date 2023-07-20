@@ -48,9 +48,21 @@ export default function RegistrationInput(props: RegistrationInputProps) {
     }
   }, []);
 
+  function getPreviewSrc() {
+    if (inputRef.current && inputRef.current.files) {
+      return URL.createObjectURL(inputRef.current.files[0]);
+    }
+    return "https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg";
+  }
+
   return (
     <>
-      {props.preview && <img src={inputRef.current.value} />}
+      {props.preview && (
+        <img
+          className="w-[10vw] mx-auto aspect-square object-cover"
+          src={getPreviewSrc()}
+        />
+      )}
       <div
         className={twMerge(
           "relative flex items-center py-4 px-6 border-2 border-front border-opacity-20 mobile:flex-col mobile:items-start",
