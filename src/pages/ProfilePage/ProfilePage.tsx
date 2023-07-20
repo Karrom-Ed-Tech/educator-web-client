@@ -1,3 +1,4 @@
+import AdditionalDetails from "./components/AdditionalDetails";
 import Hero from "./components/Hero";
 
 export default function ProfilePage() {
@@ -5,6 +6,7 @@ export default function ProfilePage() {
         <div>
         <h1>
             <Hero/>
+            <AdditionalDetails/>
         </h1>
         </div>
     );
