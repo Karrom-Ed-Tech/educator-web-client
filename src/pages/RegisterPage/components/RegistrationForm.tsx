@@ -8,6 +8,7 @@ import {
 import RegistrationInput, { RegistrationInputProps } from "./RegistrationInput";
 import MaterialIcon from "../../../common/MaterialIcon";
 import { twMerge } from "tailwind-merge";
+import { useSearchParams } from "react-router-dom";
 
 const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
   {
@@ -49,7 +50,7 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
     ],
   },
   {
-    title: "Password",
+    title: "Authentication",
     inputs: [
       {
         name: "email",
@@ -64,7 +65,6 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
         autoComplete: "password",
         title: "Password",
         constraints: { minLength: 6 },
-        optional: true,
       },
     ],
   },

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import MaterialIcon from "../../../common/MaterialIcon";
 import { twMerge } from "tailwind-merge";
+import { useSearchParams } from "react-router-dom";
 
 export interface RegistrationInputProps {
   title: string;
@@ -27,6 +28,7 @@ export default function RegistrationInput(props: RegistrationInputProps) {
   const inputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
   const [selectedOnce, setSelectedOnce] = useState(false);
   const [shake, setShake] = useState(false);
+  const [query] = useSearchParams();
 
   useEffect(() => {
     setTimeout(() => {
@@ -45,6 +47,10 @@ export default function RegistrationInput(props: RegistrationInputProps) {
     if (props.value) {
       inputRef.current.value = props.value;
       setSelectedOnce(true);
+    } else {
+      if (props.name === "email") {
+        inputRef.current.value = query.get("email") || "";
+      }
     }
   }, []);
 
@@ -65,7 +71,7 @@ export default function RegistrationInput(props: RegistrationInputProps) {
       )}
       <div
         className={twMerge(
-          "relative flex items-center py-4 px-6 border-2 border-front border-opacity-20 mobile:flex-col mobile:items-start",
+          "relative flex items-center py-4 px-6 border-2 border-front border-opacity-20 mobile:flex-col mobile:items-start animate-[grow-in_300ms]",
           selectedOnce &&
             !inputRef.current.checkValidity() &&
             "border-red-500 border-opacity-75",
