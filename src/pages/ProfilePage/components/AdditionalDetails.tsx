@@ -29,12 +29,18 @@ export default function AdditionalDetails() {
 
      <DetailItem title="Activities" tags={['Classical Dance' , 'Western Dance']} />
      <DetailItem title="Tour of the institute" video="https://www.youtube.com/watch?v=QdLLjDbi75A" />
-      <div className="text-center my-20">
+      <div className="text-center my-20 flex items-center justify-center gap-x-5">
         <Link
           to="/register"
-          className="p-3 px-5 border text-sm font-medium border-front duration-300 hover:bg-front hover:text-back"
+          className="p-3 px-5 border text-sm font-medium border-front duration-300 hover:bg-front hover:text-back flex items-center gap-x-3"
         >
-          Verify Educator
+          Approve{" "}<MaterialIcon codepoint="e876"/>
+        </Link>
+        <Link
+          to="/register"
+          className="p-3 px-5 border text-sm font-medium border-front duration-300 hover:bg-front hover:text-back flex items-center gap-x-3"
+        >
+          Reject{" "}<MaterialIcon codepoint="e14c"/>
         </Link>
       </div>
     </div>

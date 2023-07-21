@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import MaterialIcon from "../../../common/MaterialIcon";
 
 interface tableDataProps {
@@ -92,9 +93,11 @@ export default function EducatorRequests() {
                   </div>
                 </td>
                 <td className={classes}>
+                    <Link to='/admin/view'>
                   <div className="font-medium flex flex-x-2">
                     View{" "}<MaterialIcon codepoint="e941" className="text-primary -rotate-45"/>
                   </div>
+                    </Link>
                 </td>
               </tr>
             );

@@ -19,7 +19,7 @@ export default function App() {
       <Route path="/" element={<Root />}>
         <Route index element={<HomePage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/admin/view" element={<ProfilePage />} />
         <Route path="/admin" element={<AdminPage/>}/>
       </Route>
     )
