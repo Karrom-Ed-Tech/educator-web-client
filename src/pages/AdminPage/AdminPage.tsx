@@ -27,7 +27,7 @@ export default function AdminPage(){
 
     const [selectedItem , setSelectedItem] = useState<Number>(0);
     return (
-        <div className="flex h-full">
+        <div className="flex h-full mb-32">
             <div className="flex flex-col h-full justify-start p-3 bg-white w-full basis-1/4 p-page">
                 <div className="space-y-3">
                     <div className="flex items-center">
