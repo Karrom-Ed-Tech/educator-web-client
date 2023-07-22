@@ -26,18 +26,23 @@ function normalizeServerError(serverResponse: any) {
 }
 
 /* Auth */
-export async function registerEducator() {
+export async function registerEducator(name: string , email: string , phone:string , image:string , password:string) {
   try {
     const axiosConfig: axios.AxiosRequestConfig = {
       method: "post",
-      url: apiURL + "/auth/register/educator",
+      url: apiURL + "/accounts/register/",
       headers: {
         "Content-Type": "application/json",
       },
-      data: {},
+      data: JSON.stringify({
+        name , email , phone , image , password
+
+      }),
     };
     const res = await axios.default.request(axiosConfig);
+    console.log(res);
     const normalizedResponse = normalizeServerResponse(res);
+    console.log(normalizedResponse)
     return [null, normalizedResponse];
   } catch (err) {
     const errorObject = normalizeServerError(err);
