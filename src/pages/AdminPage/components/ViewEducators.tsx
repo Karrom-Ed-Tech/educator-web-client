@@ -75,7 +75,7 @@ export default function ViewEducators() {
                  </Link>
              </td>
              <td className={classes}>
-                 <Link to='/admin/view' target="_blank">
+                 <Link to='/admin/edit' target="_blank">
                <div className="font-medium flex flex-x-2">
                  Edit{" "}<MaterialIcon codepoint="e941" className="text-primary -rotate-45"/>
                </div>

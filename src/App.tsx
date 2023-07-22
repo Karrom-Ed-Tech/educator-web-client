@@ -13,6 +13,7 @@ import ScrollToTop from "./common/ScrollToTop";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import AdminPage from "./pages/AdminPage/AdminPage";
+import EditEducatorDetails from "./pages/AdminPage/components/EditEducatorDetails";
 export default function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -20,6 +21,7 @@ export default function App() {
         <Route index element={<HomePage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/admin/view" element={<ProfilePage />} />
+        <Route path="/admin/edit" element={<EditEducatorDetails/>}/>
         <Route path="/admin" element={<AdminPage/>}/>
       </Route>
     )
