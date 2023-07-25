@@ -11,6 +11,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import { GlobalContextProvider } from "./contexts/globalContext";
 import ScrollToTop from "./common/ScrollToTop";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import OnboardPage from "./pages/OnboardPage/OnboardPage";
 
 export default function App() {
   const router = createBrowserRouter(
@@ -18,6 +19,7 @@ export default function App() {
       <Route path="/" element={<Root />}>
         <Route index element={<HomePage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/onboard" element={<OnboardPage />} />
       </Route>
     )
   );
