@@ -1,4 +1,5 @@
 import Hero from "./components/Hero";
+import NewRegistrationForm from "./components/NewRegistrationForm";
 import RegistrationForm from "./components/RegistrationForm";
 
 export default function RegisterPage() {
@@ -7,7 +8,7 @@ export default function RegisterPage() {
   return (
     <>
       <Hero />
-      <RegistrationForm />
+      <NewRegistrationForm />
     </>
   );
 }
