@@ -114,7 +114,7 @@ export default function RegistrationInput(props: RegistrationInputProps) {
       >
         <p className="font-semibold">{props.title}</p>
         {props.type != "dropdown" && (
-        <input
+          <input
             autoComplete={props.autoComplete}
             ref={inputRef}
             type={props.type || "text"}
@@ -124,7 +124,9 @@ export default function RegistrationInput(props: RegistrationInputProps) {
               "flex-1 outline-none selection:outline-none px-6 mobile:ml-0 mobile:mt-5 mobile:px-0 mobile:w-full",
               props.type === "checkbox" && "flex-none ml-5 w-5 h-5 mobile:ml-0"
             )}
-            style={{ "--title-text": `"${props.title}"` } as React.CSSProperties}
+            style={
+              { "--title-text": `"${props.title}"` } as React.CSSProperties
+            }
             onChange={props.onChange}
             required={!props.optional}
             {...props.constraints}
@@ -132,53 +134,56 @@ export default function RegistrationInput(props: RegistrationInputProps) {
               inputRef.current.value.length && setSelectedOnce(true);
             }}
           />
-      )}
+        )}
 
-      {props.dropdown && (
-        <div
-          className="ml-5 h-5 w-5 flex-1 px-6 flex items-center hover:cursor-pointer relative"
-          onClick={() => {
-            setShowDropdown(true);
-          }}
-          ref={dropdownRef}
-        >
-          {" "}
-          <div className="text-secondary">
-            {props.multiple && selectedOptions.length > 0
-              ? selectedOptions.join(", ")
-              : selectedOptions.length === 1
-              ? selectedOptions[0]
-              : props.placeholder}
-          </div>
-          <MaterialIcon codepoint="e5cf" className="text-secondary text-2xl" />
+        {props.dropdown && (
           <div
-            className={`flex flex-col absolute top-10 left-6 z-10 bg-secondary w-max text-back pl-4 pt-2 pb-3 min-w-[30%] rounded-xl backdrop-blur-xl ${
-              showDropdown ? "" : "hidden"
-            }`}
+            className="ml-5 h-5 w-5 flex-1 px-6 flex items-center hover:cursor-pointer relative"
+            onClick={() => {
+              setShowDropdown(true);
+            }}
+            ref={dropdownRef}
           >
-            {props.dropdown?.map((item, i) => (
-              <div
-                onClick={() => handleDropdownClick(item)}
-                key={i}
-                className={`pt-4 border-b border-opacity-40 border-back pb-1 hover:bg-back hover:text-secondary px-2 duration-300 ease-in-out items-center flex gap-x-2`}
-              >
-                {props.multiple && (
-                  <input
-                    type="checkbox"
-                    className={`w-4 h-4 text-secondary bg-gray-100 border-gray-300 rounded focus:text-secondary dark:focus:text-secondary dark:ring-offset-gray-800 focus:ring-2 dark:text-secondary dark:border-gray-600`}
-                    checked={selectedOptions.includes(item)}
-                    readOnly
-                  />
-                )}
-                <div>{item}</div>
-              </div>
-            ))}
+            {" "}
+            <div className="text-secondary">
+              {props.multiple && selectedOptions.length > 0
+                ? selectedOptions.join(", ")
+                : selectedOptions.length === 1
+                ? selectedOptions[0]
+                : props.placeholder}
+            </div>
+            <MaterialIcon
+              codepoint="e5cf"
+              className="text-secondary text-2xl"
+            />
+            <div
+              className={`flex flex-col absolute top-10 left-6 z-10 bg-secondary w-max text-back pl-4 pt-2 pb-3 min-w-[30%] rounded-xl backdrop-blur-xl ${
+                showDropdown ? "" : "hidden"
+              }`}
+            >
+              {props.dropdown?.map((item, i) => (
+                <div
+                  onClick={() => handleDropdownClick(item)}
+                  key={i}
+                  className={`pt-4 border-b border-opacity-40 border-back pb-1 hover:bg-back hover:text-secondary px-2 duration-300 ease-in-out items-center flex gap-x-2`}
+                >
+                  {props.multiple && (
+                    <input
+                      type="checkbox"
+                      className={`w-4 h-4 text-secondary bg-gray-100 border-gray-300 rounded focus:text-secondary dark:focus:text-secondary dark:ring-offset-gray-800 focus:ring-2 dark:text-secondary dark:border-gray-600`}
+                      checked={selectedOptions.includes(item)}
+                      readOnly
+                    />
+                  )}
+                  <div>{item}</div>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
         {selectedOnce &&
-          ((inputRef.current.checkValidity() || props.type == "dropdown") ? (
+          (inputRef.current.checkValidity() || props.type == "dropdown" ? (
             <MaterialIcon
               codepoint="e876"
               className={twMerge(

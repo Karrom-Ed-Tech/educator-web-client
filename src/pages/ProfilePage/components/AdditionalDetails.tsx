@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import MaterialIcon from "../../../common/MaterialIcon";
 import DetailItem from "./DetailItem";
 
-
 export default function AdditionalDetails() {
   return (
     <div className="p-page mt-10">
@@ -24,23 +23,29 @@ export default function AdditionalDetails() {
       <DetailItem title="Qualification" content="Btech CSE" />
 
       <DetailItem title="Degree" content="View" view={true} />
-      
+
       <DetailItem title="Affiliation Proof" content="View" view={true} />
 
-     <DetailItem title="Activities" tags={['Classical Dance' , 'Western Dance']} />
-     <DetailItem title="Tour of the institute" video="https://www.youtube.com/watch?v=QdLLjDbi75A" />
+      <DetailItem
+        title="Activities"
+        tags={["Classical Dance", "Western Dance"]}
+      />
+      <DetailItem
+        title="Tour of the institute"
+        video="https://www.youtube.com/watch?v=QdLLjDbi75A"
+      />
       <div className="text-center my-20 flex items-center justify-center gap-x-5">
         <Link
           to="/register"
           className="p-3 px-5 border text-sm font-medium border-front duration-300 hover:bg-front hover:text-back flex items-center gap-x-3"
         >
-          Approve{" "}<MaterialIcon codepoint="e876"/>
+          Approve <MaterialIcon codepoint="e876" />
         </Link>
         <Link
           to="/register"
           className="p-3 px-5 border text-sm font-medium border-front duration-300 hover:bg-front hover:text-back flex items-center gap-x-3"
         >
-          Reject{" "}<MaterialIcon codepoint="e14c"/>
+          Reject <MaterialIcon codepoint="e14c" />
         </Link>
       </div>
     </div>

@@ -8,15 +8,23 @@ interface DetailItemProps {
   video?: string;
 }
 
-export default function DetailItem({ title, content, view, tags, video }: DetailItemProps) {
+export default function DetailItem({
+  title,
+  content,
+  view,
+  tags,
+  video,
+}: DetailItemProps) {
   const commonTextStyle = "text-md opacity-70 w-full basis-1/2";
   const commonFlexContainerStyle = "flex mt-10 items-start";
 
   return (
     <div className={commonFlexContainerStyle}>
       <div className="text-gray-400 text-md basis-1/2">{title}</div>
-      <div className={`${commonTextStyle} flex items-center hover:text-secondary hover:cursor-pointer`}>
-        {video ?  (
+      <div
+        className={`${commonTextStyle} flex items-center hover:text-secondary hover:cursor-pointer`}
+      >
+        {video ? (
           <iframe
             title={title}
             width="560"
@@ -27,16 +35,22 @@ export default function DetailItem({ title, content, view, tags, video }: Detail
           />
         ) : (
           <>
-            {tags ? (
-              tags.map((tag, index) => (
-                <div key={index} className="mr-2 bg-gray-200 px-2 py-1 rounded">
-                  {tag}
-                </div>
-              ))
-            ) : (
-              content
+            {tags
+              ? tags.map((tag, index) => (
+                  <div
+                    key={index}
+                    className="mr-2 bg-gray-200 px-2 py-1 rounded"
+                  >
+                    {tag}
+                  </div>
+                ))
+              : content}
+            {view && (
+              <MaterialIcon
+                codepoint="e5d8"
+                className="text-primary rotate-45"
+              />
             )}
-            {view && <MaterialIcon codepoint="e5d8" className="text-primary rotate-45" />}
           </>
         )}
       </div>

@@ -32,15 +32,21 @@ export default function Hero() {
             </div>
           </div>
         </div> */}
-        <div className="tracking-widest text-xs text-gray-400 mt-5">Website</div>
+        <div className="tracking-widest text-xs text-gray-400 mt-5">
+          Website
+        </div>
         <div className="flex items-center mt-3">
-          <div className="text-md opacity-70 basis-1/4">Want to know what we do?</div>
+          <div className="text-md opacity-70 basis-1/4">
+            Want to know what we do?
+          </div>
           <div className="text-xs flex items-center ml-32 text-gray-400 gap-x-3 hover:text-secondary  hover:cursor-pointer">
             <MaterialIcon codepoint="e894" className="text-primary " />
             Visit here!
           </div>
         </div>
-        <div className="tracking-widest text-xs text-gray-400 mt-5">Institute</div>
+        <div className="tracking-widest text-xs text-gray-400 mt-5">
+          Institute
+        </div>
         <div className="flex items-center mt-3">
           <div className="text-md opacity-70 basis-1/4">ABV-IIITM Gwalior</div>
           <div className="text-xs flex items-center ml-32 text-gray-400 gap-x-3">

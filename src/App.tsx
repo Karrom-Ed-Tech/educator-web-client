@@ -24,8 +24,8 @@ export default function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/onboard" element={<OnboardPage />} />
         <Route path="/admin/view" element={<ProfilePage />} />
-        <Route path="/admin/edit" element={<EditEducatorDetails/>}/>
-        <Route path="/admin" element={<AdminPage/>}/>
+        <Route path="/admin/edit" element={<EditEducatorDetails />} />
+        <Route path="/admin" element={<AdminPage />} />
       </Route>
     )
   );

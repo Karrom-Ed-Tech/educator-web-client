@@ -65,41 +65,54 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
   {
     title: "Teacher's Profile",
     inputs: [
-        {
-            name: "text",
-            title: "Teacher Number",
-            type: "dropdown",
-            placeholder: "Select which teacher number details are to be filled",
-            dropdown: ["Teacher 1", "Teacher 2", "Teacher 3", "Teacher 4", "Teacher 5"]
-          },
-          {
-            name: "name",
-            title: "Teacher Name",
-            placeholder: "Enter name with salutation"
-          },
-          {
-            name: "Qualification",
-            title: "Enter qualification of the teacher",
-            placeholder: "You'all have to attach the document"
-          },
-          {
-            name: "Experince",
-            title: "Experience in years teaching the subject"
-          },
-          {
-            name: "awards",
-            title: "Awards & Accolades"
-          },
-          {
-            name: "activities",
-            title: "Activities taught by teacher at centre",
-            type: "dropdown",
-            placeholder: "Select multiple options from the dropdown",
-            dropdown: ["Swimming", "Basketball", "Handball", "Cricket", "Baseball", "Badminton"],
-            multiple: true
-          }
-    ]
-  }
+      {
+        name: "text",
+        title: "Teacher Number",
+        type: "dropdown",
+        placeholder: "Select which teacher number details are to be filled",
+        dropdown: [
+          "Teacher 1",
+          "Teacher 2",
+          "Teacher 3",
+          "Teacher 4",
+          "Teacher 5",
+        ],
+      },
+      {
+        name: "name",
+        title: "Teacher Name",
+        placeholder: "Enter name with salutation",
+      },
+      {
+        name: "Qualification",
+        title: "Enter qualification of the teacher",
+        placeholder: "You'all have to attach the document",
+      },
+      {
+        name: "Experince",
+        title: "Experience in years teaching the subject",
+      },
+      {
+        name: "awards",
+        title: "Awards & Accolades",
+      },
+      {
+        name: "activities",
+        title: "Activities taught by teacher at centre",
+        type: "dropdown",
+        placeholder: "Select multiple options from the dropdown",
+        dropdown: [
+          "Swimming",
+          "Basketball",
+          "Handball",
+          "Cricket",
+          "Baseball",
+          "Badminton",
+        ],
+        multiple: true,
+      },
+    ],
+  },
 ];
 
 export default function OnboardPage() {
@@ -111,7 +124,7 @@ export default function OnboardPage() {
 
   function nextStepHandler() {
     // const isFormValid = currentFormRef.current.checkValidity();
-    const isFormValid = true
+    const isFormValid = true;
     if (isFormValid) {
       setCurrentStep((step) =>
         step < formSteps.length - 1 ? step + 1 : formSteps.length - 1

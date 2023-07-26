@@ -8,138 +8,138 @@ import {
 import RegistrationInput, { RegistrationInputProps } from "./RegistrationInput";
 import MaterialIcon from "../../../common/MaterialIcon";
 import { twMerge } from "tailwind-merge";
-import * as API from "../../../Services/Apis.tsx"
+import * as API from "../../../services/api";
 import { useSearchParams } from "react-router-dom";
 
 const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
-    {
-      title: "Basic Details",
-      inputs: [
-        {
-          name: "image",
-          title: "Display Picture",
-          type: "file",
-          constraints: { accept: "image/*" },
-          preview: true,
+  {
+    title: "Basic Details",
+    inputs: [
+      {
+        name: "image",
+        title: "Display Picture",
+        type: "file",
+        constraints: { accept: "image/*" },
+        preview: true,
+      },
+      {
+        name: "name",
+        title: "Educator name",
+        placeholder: "e.g: Sunil Kumar",
+        constraints: { minLength: 5 },
+      },
+      {
+        name: "isAcademy",
+        title: "Is this an academy with multiple educators?",
+        type: "checkbox",
+        optional: true,
+      },
+      {
+        name: "mobile",
+        title: "Phone number",
+        placeholder: "Mobile number for first point of contact",
+        constraints: { pattern: `^(0|91|\\+91)?[6-9][0-9]{9}$` },
+      },
+      {
+        name: "email",
+        title: "Email address for verificiation!",
+        placeholder: "Email address for verification",
+        type: "email",
+      },
+      {
+        name: "password",
+        placeholder: "Set a string password",
+        type: "password",
+        autoComplete: "password",
+        title: "Password",
+        constraints: { minLength: 6 },
+      },
+    ],
+  },
+  {
+    title: "Additional Info",
+    inputs: [
+      {
+        name: "website",
+        title: "Website (if any)",
+        placeholder: "Personal website / Academy website",
+        type: "url",
+      },
+      {
+        name: "address",
+        title: "Full Address",
+        placeholder: "Including zipcode, city, street address",
+        constraints: {
+          minLength: 15,
         },
-        {
-          name: "name",
-          title: "Educator name",
-          placeholder: "e.g: Sunil Kumar",
-          constraints: { minLength: 5 },
+        type: "string",
+      },
+      {
+        name: "experience",
+        title: "How many years of experience do you have ?",
+        type: "number",
+        constraints: { min: 0, max: 80 },
+      },
+      {
+        name: "qualification",
+        title: "Your Qualification",
+        placeholder: "e.g: BSc Chemistry / BTech CSE",
+        type: "string",
+      },
+      {
+        name: "degree",
+        title: "Upload proof of qualification (degree / certificate)",
+        type: "file",
+        constraints: {
+          accept:
+            "image/jpeg,image/png,application/pdf,application/msword,image/x-eps",
         },
-        {
-          name: "isAcademy",
-          title: "Is this an academy with multiple educators?",
-          type: "checkbox",
-          optional: true,
+      },
+      {
+        name: "affliation",
+        title: "Specify any institute you are affiliated with [optional]",
+        placeholder: "e.g: IIT Delhi, Mumbai University",
+        optional: true,
+      },
+      {
+        name: "affliationProof",
+        type: "file",
+        title: "Upload proof of affiliation (if any)",
+        constraints: {
+          accept:
+            "image/jpeg,image/png,application/pdf,application/msword,image/x-eps",
         },
-        {
-          name: "mobile",
-          title: "Phone number",
-          placeholder: "Mobile number for first point of contact",
-          constraints: { pattern: `^(0|91|\\+91)?[6-9][0-9]{9}$` },
+        optional: true,
+      },
+    ],
+  },
+  {
+    title: "Final Steps",
+    inputs: [
+      {
+        name: "teacherCount",
+        title: "How many teachers work under this academy?",
+        placeholder: "leave blank if not an academy",
+        type: "number",
+        optional: true,
+      },
+      {
+        name: "tourVideoUrl",
+        title: "Tour of your institute (YouTube Video)",
+        placeholder: "Provide a valid youtube video url",
+        type: "url",
+        constraints: {
+          pattern: `^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|v\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})`,
         },
-        {
-          name: "email",
-          title: "Email address for verificiation!",
-          placeholder: "Email address for verification",
-          type: "email",
-        },
-        {
-          name: "password",
-          placeholder: "Set a string password",
-          type: "password",
-          autoComplete: "password",
-          title: "Password",
-          constraints: { minLength: 6 },
-        },
-      ],
-    },
-    {
-      title: "Additional Info",
-      inputs: [
-        {
-          name: "website",
-          title: "Website (if any)",
-          placeholder: "Personal website / Academy website",
-          type: "url",
-        },
-        {
-          name: "address",
-          title: "Full Address",
-          placeholder: "Including zipcode, city, street address",
-          constraints: {
-            minLength: 15,
-          },
-          type: "string",
-        },
-        {
-          name: "experience",
-          title: "How many years of experience do you have ?",
-          type: "number",
-          constraints: { min: 0, max: 80 },
-        },
-        {
-          name: "qualification",
-          title: "Your Qualification",
-          placeholder: "e.g: BSc Chemistry / BTech CSE",
-          type: "string",
-        },
-        {
-          name: "degree",
-          title: "Upload proof of qualification (degree / certificate)",
-          type: "file",
-          constraints: {
-            accept:
-              "image/jpeg,image/png,application/pdf,application/msword,image/x-eps",
-          },
-        },
-        {
-          name: "affliation",
-          title: "Specify any institute you are affiliated with [optional]",
-          placeholder: "e.g: IIT Delhi, Mumbai University",
-          optional: true,
-        },
-        {
-          name: "affliationProof",
-          type: "file",
-          title: "Upload proof of affiliation (if any)",
-          constraints: {
-            accept:
-              "image/jpeg,image/png,application/pdf,application/msword,image/x-eps",
-          },
-          optional: true,
-        },
-      ],
-    },
-    {
-      title: "Final Steps",
-      inputs: [
-        {
-          name: "teacherCount",
-          title: "How many teachers work under this academy?",
-          placeholder: "leave blank if not an academy",
-          type: "number",
-          optional: true,
-        },
-        {
-          name: "tourVideoUrl",
-          title: "Tour of your institute (YouTube Video)",
-          placeholder: "Provide a valid youtube video url",
-          type: "url",
-          constraints: {
-            pattern: `^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|v\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})`,
-          },
-        },
-        {
-          name: "mainlyTeaches",
-          title: "What activities do you mainly teach",
-          placeholder: "e.g: skating, piano, violin",
-          type: "string",
-        },
-      ],
-    },
+      },
+      {
+        name: "mainlyTeaches",
+        title: "What activities do you mainly teach",
+        placeholder: "e.g: skating, piano, violin",
+        type: "string",
+      },
+    ],
+  },
 ];
 interface RegistrationFormProps {
   name: string;
@@ -151,18 +151,26 @@ interface RegistrationFormProps {
 
 export default function RegistrationForm() {
   const [currentStep, setCurrentStep] = useState(0);
-  const [formData, setFormData] = useState<RegistrationFormProps>({});
+  const [formData, setFormData] = useState<RegistrationFormProps>(
+    {} as RegistrationFormProps
+  );
   const [errorCheckFlag, setErrorCheckFlag] = useState(false);
   const [updateFlag, setUpdateFlag] = useState(true);
 
   const currentFormRef = useRef() as React.MutableRefObject<HTMLFormElement>;
-  
+
   const handleUserRegisteration = async () => {
-    const [err , res] = await API.registerEducator(formData.name , formData.email , formData.mobile , formData.image , formData.password)
-    console.log(err , res)
-  }
-  const nextStepHandler = async() => {
-    console.log(formData)
+    const [err, res] = await API.registerEducator(
+      formData.name,
+      formData.email,
+      formData.mobile,
+      formData.image,
+      formData.password
+    );
+    console.log(err, res);
+  };
+  const nextStepHandler = async () => {
+    console.log(formData);
     await handleUserRegisteration();
     const isFormValid = currentFormRef.current.checkValidity();
     if (isFormValid) {
@@ -176,7 +184,7 @@ export default function RegistrationForm() {
         setErrorCheckFlag((f) => !f);
       }, 1);
     }
-  }
+  };
 
   useEffect(() => {
     if (!updateFlag) {
