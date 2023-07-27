@@ -148,6 +148,25 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
       },
     ],
   },
+  {
+    title: "Images/Videos",
+    inputs: [
+      {
+          name: "tourVideoUrl",
+          title: "Tour of your institute (YouTube Video)",
+          placeholder: "Provide a valid youtube video url",
+          type: "url",
+          constraints: {
+            pattern: `^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|v\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})`,
+          },
+      },
+      {
+        name:"academyImages",
+        title:"Image of your academy",
+        type:"file"
+      }
+    ]
+  }
 ];
 
 export default function OnboardPage() {

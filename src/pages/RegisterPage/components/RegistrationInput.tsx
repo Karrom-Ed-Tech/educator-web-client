@@ -112,7 +112,7 @@ export default function RegistrationInput(props: RegistrationInputProps) {
       )}
       <div
         className={twMerge(
-          "relative flex items-center py-4 px-6 border-2 border-front border-opacity-20 mobile:flex-col mobile:items-start animate-[grow-in_300ms]",
+          "relative flex items-center py-4 px-6 border-2 border-front border-opacity-20 mobile:flex-colmobile:items-start animate-[grow-in_300ms]",
           selectedOnce &&
             !inputRef.current.checkValidity() &&
             "border-red-500 border-opacity-75",
