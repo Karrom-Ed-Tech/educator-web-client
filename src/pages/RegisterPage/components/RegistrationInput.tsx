@@ -36,6 +36,7 @@ export default function RegistrationInput(props: RegistrationInputProps) {
   const selectedOptionRef = useRef<HTMLDivElement>(null);
 
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   const handleDropdownClick = (item: string) => {
     if (props.multiple) {
@@ -95,6 +96,12 @@ export default function RegistrationInput(props: RegistrationInputProps) {
     };
   }, []);
 
+  const filteredOptions = props.dropdown
+    ? props.dropdown.filter((item) =>
+        item.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : [];
+
   return (
     <>
       {props.preview && (
@@ -144,7 +151,6 @@ export default function RegistrationInput(props: RegistrationInputProps) {
             }}
             ref={dropdownRef}
           >
-            {" "}
             <div className="text-secondary">
               {props.multiple && selectedOptions.length > 0
                 ? selectedOptions.join(", ")
@@ -157,11 +163,18 @@ export default function RegistrationInput(props: RegistrationInputProps) {
               className="text-secondary text-2xl"
             />
             <div
-              className={`flex flex-col absolute top-10 left-6 z-10 bg-secondary w-max text-back pl-4 pt-2 pb-3 min-w-[30%] rounded-xl backdrop-blur-xl ${
+              className={`flex flex-col absolute top-10 left-6 z-10 bg-secondary w-max text-back px-4 pt-2 pb-3 min-w-[30%] rounded-xl backdrop-blur-xl ${
                 showDropdown ? "" : "hidden"
               }`}
             >
-              {props.dropdown?.map((item, i) => (
+              <input
+                type="text"
+                placeholder="Search..."
+                className="p-2 mb-2 bg-back border border-back rounded-lg text-front focus:outline-none focus:ring-2 focus:ring-primary"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              {filteredOptions.map((item, i) => (
                 <div
                   onClick={() => handleDropdownClick(item)}
                   key={i}
