@@ -49,6 +49,22 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
         title: "Account Number",
       },
       {
+        name: "status",
+        type: "dropdown",
+        title: "Estalblishment status",
+        placeholder: "Select from the below dropdown",
+        dropdown: ["SP", "LLC", "Not-registered"],
+      },
+      {
+        name: "ownerId",
+        title: "Identity proof : Adhaar card/ Pan card / VoterId",
+        type: "file",
+        constraints: {
+          accept:
+            "image/jpeg,image/png,application/pdf,application/msword,image/x-eps",
+        },
+      },
+      {
         name: "social",
         type: "dropdown",
         title: "Social Media handle",
@@ -63,21 +79,33 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
     ],
   },
   {
-    title: "Teacher's Profile",
+    title: "Contact details",
     inputs: [
       {
-        name: "text",
-        title: "Teacher Number",
-        type: "dropdown",
-        placeholder: "Select which teacher number details are to be filled",
-        dropdown: [
-          "Teacher 1",
-          "Teacher 2",
-          "Teacher 3",
-          "Teacher 4",
-          "Teacher 5",
-        ],
+        name: "ownerContact",
+        title: "Owner contact number",
+        placeholder: "Mobile number of owner",
+        constraints: { pattern: `^(0|91|\\+91)?[6-9][0-9]{9}$` },
       },
+      {
+        name: "centerContact",
+        title: "Center contact number",
+        placeholder: "Mobile number of center",
+        constraints: { pattern: `^(0|91|\\+91)?[6-9][0-9]{9}$` },
+      },
+      {
+        name: "alternateContact",
+        title: "Alternate contact number",
+        placeholder: "Any alternate contact number ?",
+        constraints: { pattern: `^(0|91|\\+91)?[6-9][0-9]{9}$` },
+        optional: true,
+      },
+    ],
+  },
+
+  {
+    title: "Teacher's Profile",
+    inputs: [
       {
         name: "name",
         title: "Teacher Name",
@@ -89,8 +117,15 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
         placeholder: "You'all have to attach the document",
       },
       {
-        name: "Experince",
-        title: "Experience in years teaching the subject",
+        name: "QualificationDoc",
+        title: "Upload qualification of the teacher",
+        type: "file",
+      },
+      {
+        name: "experience",
+        title: "How many years of experience does teacher has?",
+        type: "number",
+        constraints: { min: 0, max: 80 },
       },
       {
         name: "awards",
@@ -119,6 +154,11 @@ export default function OnboardPage() {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<object>({});
   const [errorCheckFlag, setErrorCheckFlag] = useState(false);
+  const [teacherDetailsCount, setTeacherDetailsCount] = useState<number>(1);
+
+  function addTeacherHandler() {
+    setTeacherDetailsCount((count) => count + 1);
+  }
 
   const currentFormRef = useRef() as React.MutableRefObject<HTMLFormElement>;
 
@@ -196,22 +236,49 @@ export default function OnboardPage() {
         ref={currentFormRef}
         className="flex-1 flex flex-col items-stretch px-[6vw] gap-y-8 py-8"
       >
-        {formSteps[currentStep].inputs.map((input, i) => (
-          <RegistrationInput
-            key={i}
-            errorCheckFlag={errorCheckFlag}
-            value={(formData as any)[input.name]}
-            {...input}
-            onChange={(event) => {
-              setFormData((prev) => ({
-                ...prev,
-                [input.name]: event.target.value,
-              }));
-            }}
-          />
-        ))}
+        {currentStep == 2
+          ? Array.from({ length: teacherDetailsCount }).map((_, index) => (
+              <div key={index}>
+                <h3 className="text-2xl font-bold mb-4">
+                  Teacher {index+1}
+                </h3>
+                {formSteps[2].inputs.map((input, i) => (
+                  <RegistrationInput
+                    key={i}
+                    errorCheckFlag={errorCheckFlag}
+                    value={(formData as any)[`${input.name}_${index}`]}
+                    {...input}
+                    onChange={(event) => {
+                      setFormData((prev) => ({
+                        ...prev,
+                        [`${input.name}_${index}`]: event.target.value,
+                      }));
+                    }}
+                  />
+                ))}
+              </div>
+            ))
+          : formSteps[currentStep].inputs.map((input, i) => (
+              <RegistrationInput
+                key={i}
+                errorCheckFlag={errorCheckFlag}
+                value={(formData as any)[input.name]}
+                {...input}
+                onChange={(event) => {
+                  setFormData((prev) => ({
+                    ...prev,
+                    [input.name]: event.target.value,
+                  }));
+                }}
+              />
+            ))}
       </form>
-
+      {
+        currentStep == 2 &&
+        <button type="button" onClick={addTeacherHandler} className="flex items-center justify-center">
+          <MaterialIcon codepoint="e145" className="p-2 border-rounded bg-black text-white mr-5"/> Add Teacher
+        </button>
+      }
       <div className="flex justify-end p-5">
         {currentStep !== 0 && (
           <button
