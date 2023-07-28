@@ -53,8 +53,14 @@ export default function AddTeacherSchedule() {
   const [selectedDay, setSelectedDay] = useState<string>("");
   const [selectedStartTime, setSelectedStartTime] = useState<string>("");
   const [selectedEndTime, setSelectedEndTime] = useState<string>("");
+  const [error, setError] = useState<Boolean>(false);
 
   const handleAddTiming = () => {
+    setError(false);
+    if(!selectedDay || !selectedStartTime || !selectedEndTime){
+      setError(true);
+      return;
+    };
       const existingDayIndex = schedule.findIndex((timing) => timing.day === selectedDay);
       if (existingDayIndex >= 0) {
         const updatedSchedule = [...schedule];
@@ -129,6 +135,10 @@ export default function AddTeacherSchedule() {
       >
         Add Timing
       </button>
+      {
+        error && 
+        <span className="ml-5 text-red-400">*Enter all the details for the schedule</span>
+      }
       <div>
         {schedule.map((timing, index) => (
           <div key={index}>
