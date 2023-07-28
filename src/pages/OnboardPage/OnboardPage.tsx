@@ -4,6 +4,7 @@ import RegistrationInput, {
 } from "../RegisterPage/components/RegistrationInput";
 import MaterialIcon from "../../common/MaterialIcon";
 import { twMerge } from "tailwind-merge";
+import AddTeacherSchedule from "./components/AddTeacherSchedule";
 const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
   {
     title: "Enter Details",
@@ -276,6 +277,7 @@ export default function OnboardPage() {
                     }}
                   />
                 ))}
+                <AddTeacherSchedule/>
               </div>
             ))
           : formSteps[currentStep].inputs.map((input, i) => (

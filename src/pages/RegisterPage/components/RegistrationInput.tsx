@@ -25,6 +25,8 @@ export interface RegistrationInputProps {
   errorCheckFlag?: boolean;
   value?: any;
   multipleImages?: boolean;
+  onSelectionChange?: (selectedItem: string) => void;
+  lengthHalf?:Boolean
 }
 
 export default function RegistrationInput(props: RegistrationInputProps) {
@@ -123,7 +125,7 @@ export default function RegistrationInput(props: RegistrationInputProps) {
       )}
       <div
         className={twMerge(
-          "relative flex items-center py-4 px-6 border-2 border-front border-opacity-20 mobile:flex-colmobile:items-start animate-[grow-in_300ms]",
+          "relative flex items-center py-4 px-6 border-2 border-front border-opacity-20 mobile:flex-colmobile:items-start animate-[grow-in_300ms]", props.lengthHalf && "basis-1/2",
           selectedOnce &&
             !inputRef.current.checkValidity() &&
             "border-red-500 border-opacity-75",
@@ -139,7 +141,7 @@ export default function RegistrationInput(props: RegistrationInputProps) {
             name={props.name}
             placeholder={props.placeholder}
             className={twMerge(
-              "flex-1 outline-none selection:outline-none px-6 mobile:ml-0 mobile:mt-5 mobile:px-0 mobile:w-full",
+              "flex-1 outline-none selection:outline-none px-6 mobile:ml-0 mobile:mt-5 mobile:px-0 mobile:w-full ",
               props.type === "checkbox" && "flex-none ml-5 w-5 h-5 mobile:ml-0"
             )}
             style={
@@ -174,7 +176,7 @@ export default function RegistrationInput(props: RegistrationInputProps) {
               input.type = "file";
               input.multiple = true;
               input.accept = "image/*";
-              input.addEventListener("change", handleImageSelection);
+              input.addEventListener("change",handleImageSelection);
               document.body.appendChild(input);
               input.click();
               document.body.removeChild(input);
@@ -214,11 +216,15 @@ export default function RegistrationInput(props: RegistrationInputProps) {
                 placeholder="Search..."
                 className="p-2 mb-2 bg-back border border-back rounded-lg text-front focus:outline-none focus:ring-2 focus:ring-primary"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value)}}
               />
               {filteredOptions.map((item, i) => (
                 <div
-                  onClick={() => handleDropdownClick(item)}
+                  onClick={() =>{
+                    props.onSelectionChange(item);
+                    handleDropdownClick(item)}
+                  }
                   key={i}
                   className={`pt-4 border-b border-opacity-40 border-back pb-1 hover:bg-back hover:text-secondary px-2 duration-300 ease-in-out items-center flex gap-x-2`}
                 >
