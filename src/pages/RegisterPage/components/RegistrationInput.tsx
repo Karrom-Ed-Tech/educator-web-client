@@ -24,6 +24,7 @@ export interface RegistrationInputProps {
   preview?: boolean;
   errorCheckFlag?: boolean;
   value?: any;
+  multipleImages?: boolean;
 }
 
 export default function RegistrationInput(props: RegistrationInputProps) {
@@ -37,6 +38,8 @@ export default function RegistrationInput(props: RegistrationInputProps) {
 
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [selectedImages, setSelectedImages] = useState<string[]>([]);
+
 
   const handleDropdownClick = (item: string) => {
     if (props.multiple) {
@@ -83,6 +86,14 @@ export default function RegistrationInput(props: RegistrationInputProps) {
     }
     return "https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg";
   }
+  function handleImageSelection(event: React.ChangeEvent<HTMLInputElement>){
+    const files = event.target.files;
+    if (files) {
+      const urls = Array.from(files).map((file) => URL.createObjectURL(file));
+      setSelectedImages((prevImages) => [...prevImages, ...urls]);
+      event.target.value = ""; 
+    }
+  };
 
   useEffect(() => {
     const handleClick = (event: any) => {
@@ -142,6 +153,37 @@ export default function RegistrationInput(props: RegistrationInputProps) {
             }}
           />
         )}
+
+{props.multipleImages && (
+        <div>
+          <div className="flex gap-2 mt-2">
+            {selectedImages.map((url, index) => (
+              <img
+                key={index}
+                src={url}
+                alt={`Selected Image ${index + 1}`}
+                className="w-16 h-16 object-cover rounded"
+              />
+            ))}
+          </div>
+          <button
+            type="button"
+            className="mt-2 px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark"
+            onClick={() => {
+              const input = document.createElement("input");
+              input.type = "file";
+              input.multiple = true;
+              input.accept = "image/*";
+              input.addEventListener("change", handleImageSelection);
+              document.body.appendChild(input);
+              input.click();
+              document.body.removeChild(input);
+            }}
+          >
+            Add More Images
+          </button>
+        </div>
+      )}
 
         {props.dropdown && (
           <div

@@ -163,7 +163,7 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
       {
         name:"academyImages",
         title:"Image of your academy",
-        type:"file"
+        type:""
       }
     ]
   }
@@ -182,6 +182,7 @@ export default function OnboardPage() {
   const currentFormRef = useRef() as React.MutableRefObject<HTMLFormElement>;
 
   function nextStepHandler() {
+    console.log(formData)
     // const isFormValid = currentFormRef.current.checkValidity();
     const isFormValid = true;
     if (isFormValid) {
@@ -280,6 +281,7 @@ export default function OnboardPage() {
           : formSteps[currentStep].inputs.map((input, i) => (
               <RegistrationInput
                 key={i}
+                multipleImages = {input.name=="academyImages"}
                 errorCheckFlag={errorCheckFlag}
                 value={(formData as any)[input.name]}
                 {...input}
