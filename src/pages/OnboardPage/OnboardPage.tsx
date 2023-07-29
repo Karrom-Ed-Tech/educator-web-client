@@ -23,11 +23,11 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
         name: "location",
         title: "Enter the location of the company",
       },
-      {
-        name: "mobile",
-        title: "Phone number",
-        constraints: { pattern: `^(0|91)?[6-9][0-9]{9}$` },
-      },
+      // {
+      //   name: "mobile",
+      //   title: "Phone number",
+      //   constraints: { pattern: `^(0|91)?[6-9][0-9]{9}$` },
+      // },
       {
         name: "name",
         title: "Academy owner name",
@@ -72,11 +72,11 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
         placeholder: "Select from the below dropdown",
         dropdown: ["Instagram", "Discord", "Facebook", "LinkedIn"],
       },
-      {
-        name: "teachers",
-        type: "number",
-        title: "Enter Number of Teachers",
-      },
+      // {
+      //   name: "teachers",
+      //   type: "number",
+      //   title: "Enter Number of Teachers",
+      // },
     ],
   },
   {

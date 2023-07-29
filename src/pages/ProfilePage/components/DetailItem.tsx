@@ -6,6 +6,8 @@ interface DetailItemProps {
   view?: boolean;
   tags?: string[];
   video?: string;
+  techerDetails?: Boolean
+  schedule?: []
 }
 
 export default function DetailItem({
@@ -14,9 +16,11 @@ export default function DetailItem({
   view,
   tags,
   video,
+  techerDetails,
+  schedule
 }: DetailItemProps) {
   const commonTextStyle = "text-md opacity-70 w-full basis-1/2";
-  const commonFlexContainerStyle = "flex mt-10 items-start";
+  const commonFlexContainerStyle = `flex mt-10 items-start ${techerDetails && "mt-4"}`;
 
   return (
     <div className={commonFlexContainerStyle}>
@@ -24,13 +28,26 @@ export default function DetailItem({
       <div
         className={`${commonTextStyle} flex items-center hover:text-secondary hover:cursor-pointer`}
       >
+        {
+          schedule && (
+            <div className="flex flex-col gap-y-3">
+              <div>
+              <div className="text-sm text-gray-600">MONDAY</div>
+              <div>18:00-19:00</div>
+              </div>
+              <div>
+              <div className="text-sm text-gray-600">MONDAY</div>
+              <div>18:00-19:00</div>
+              </div>
+              </div>
+          )
+        }
         {video ? (
           <iframe
             title={title}
             width="560"
             height="315"
             src={video.replace("watch?v=", "embed/")}
-            frameBorder="0"
             allowFullScreen
           />
         ) : (

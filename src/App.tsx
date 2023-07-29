@@ -16,6 +16,7 @@ import OnboardPage from "./pages/OnboardPage/OnboardPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import AdminPage from "./pages/AdminPage/AdminPage";
 import EditEducatorDetails from "./pages/AdminPage/components/EditEducatorDetails";
+import EducatorDashboard from "./pages/EducatorDashboardPage/EducatorDashboard";
 export default function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -23,6 +24,7 @@ export default function App() {
         <Route index element={<HomePage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/onboard" element={<OnboardPage />} />
+        <Route path="/educator/dashboard" element={<EducatorDashboard/>}/>
         <Route path="/admin/view" element={<ProfilePage />} />
         <Route path="/admin/edit" element={<EditEducatorDetails />} />
         <Route path="/admin" element={<AdminPage />} />
