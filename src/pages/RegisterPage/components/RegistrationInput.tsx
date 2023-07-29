@@ -176,7 +176,7 @@ export default function RegistrationInput(props: RegistrationInputProps) {
                 input.type = "file";
                 input.multiple = true;
                 input.accept = "image/*";
-                input.addEventListener("change", handleImageSelection);
+                input.addEventListener("change", handleImageSelection as any);
                 document.body.appendChild(input);
                 input.click();
                 document.body.removeChild(input);
@@ -224,7 +224,7 @@ export default function RegistrationInput(props: RegistrationInputProps) {
               {filteredOptions.map((item, i) => (
                 <div
                   onClick={() => {
-                    props.onSelectionChange(item);
+                    props.onSelectionChange && props.onSelectionChange(item);
                     handleDropdownClick(item);
                   }}
                   key={i}
