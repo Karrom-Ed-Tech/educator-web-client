@@ -26,7 +26,7 @@ export interface RegistrationInputProps {
   value?: any;
   multipleImages?: boolean;
   onSelectionChange?: (selectedItem: string) => void;
-  lengthHalf?:Boolean
+  lengthHalf?: Boolean;
 }
 
 export default function RegistrationInput(props: RegistrationInputProps) {
@@ -41,7 +41,6 @@ export default function RegistrationInput(props: RegistrationInputProps) {
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
-
 
   const handleDropdownClick = (item: string) => {
     if (props.multiple) {
@@ -88,14 +87,14 @@ export default function RegistrationInput(props: RegistrationInputProps) {
     }
     return "https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg";
   }
-  function handleImageSelection(event: React.ChangeEvent<HTMLInputElement>){
+  function handleImageSelection(event: React.ChangeEvent<HTMLInputElement>) {
     const files = event.target.files;
     if (files) {
       const urls = Array.from(files).map((file) => URL.createObjectURL(file));
       setSelectedImages((prevImages) => [...prevImages, ...urls]);
-      event.target.value = ""; 
+      event.target.value = "";
     }
-  };
+  }
 
   useEffect(() => {
     const handleClick = (event: any) => {
@@ -125,7 +124,8 @@ export default function RegistrationInput(props: RegistrationInputProps) {
       )}
       <div
         className={twMerge(
-          "relative flex items-center py-4 px-6 border-2 border-front border-opacity-20 mobile:flex-colmobile:items-start animate-[grow-in_300ms]", props.lengthHalf && "basis-1/2",
+          "relative flex items-center py-4 px-6 border-2 border-front border-opacity-20 mobile:flex-colmobile:items-start animate-[grow-in_300ms]",
+          props.lengthHalf && "basis-1/2",
           selectedOnce &&
             !inputRef.current.checkValidity() &&
             "border-red-500 border-opacity-75",
@@ -156,36 +156,36 @@ export default function RegistrationInput(props: RegistrationInputProps) {
           />
         )}
 
-{props.multipleImages && (
-        <div>
-          <div className="flex gap-2 mt-2">
-            {selectedImages.map((url, index) => (
-              <img
-                key={index}
-                src={url}
-                alt={`Selected Image ${index + 1}`}
-                className="w-16 h-16 object-cover rounded"
-              />
-            ))}
+        {props.multipleImages && (
+          <div>
+            <div className="flex gap-2 mt-2">
+              {selectedImages.map((url, index) => (
+                <img
+                  key={index}
+                  src={url}
+                  alt={`Selected Image ${index + 1}`}
+                  className="w-16 h-16 object-cover rounded"
+                />
+              ))}
+            </div>
+            <button
+              type="button"
+              className="mt-2 px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark"
+              onClick={() => {
+                const input = document.createElement("input");
+                input.type = "file";
+                input.multiple = true;
+                input.accept = "image/*";
+                input.addEventListener("change", handleImageSelection);
+                document.body.appendChild(input);
+                input.click();
+                document.body.removeChild(input);
+              }}
+            >
+              Add More Images
+            </button>
           </div>
-          <button
-            type="button"
-            className="mt-2 px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark"
-            onClick={() => {
-              const input = document.createElement("input");
-              input.type = "file";
-              input.multiple = true;
-              input.accept = "image/*";
-              input.addEventListener("change",handleImageSelection);
-              document.body.appendChild(input);
-              input.click();
-              document.body.removeChild(input);
-            }}
-          >
-            Add More Images
-          </button>
-        </div>
-      )}
+        )}
 
         {props.dropdown && (
           <div
@@ -214,17 +214,19 @@ export default function RegistrationInput(props: RegistrationInputProps) {
               <input
                 type="text"
                 placeholder="Search..."
+                autoFocus
                 className="p-2 mb-2 bg-back border border-back rounded-lg text-front focus:outline-none focus:ring-2 focus:ring-primary"
                 value={searchQuery}
                 onChange={(e) => {
-                  setSearchQuery(e.target.value)}}
+                  setSearchQuery(e.target.value);
+                }}
               />
               {filteredOptions.map((item, i) => (
                 <div
-                  onClick={() =>{
+                  onClick={() => {
                     props.onSelectionChange(item);
-                    handleDropdownClick(item)}
-                  }
+                    handleDropdownClick(item);
+                  }}
                   key={i}
                   className={`pt-4 border-b border-opacity-40 border-back pb-1 hover:bg-back hover:text-secondary px-2 duration-300 ease-in-out items-center flex gap-x-2`}
                 >
