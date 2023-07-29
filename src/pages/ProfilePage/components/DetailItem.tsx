@@ -1,5 +1,10 @@
 import MaterialIcon from "../../../common/MaterialIcon";
 
+interface scheduleProps{
+  day:string,
+  startTime:string,
+  endTime:string
+}
 interface DetailItemProps {
   title: string;
   content?: string;
@@ -7,7 +12,7 @@ interface DetailItemProps {
   tags?: string[];
   video?: string;
   techerDetails?: Boolean
-  schedule?: []
+  schedule?: scheduleProps
 }
 
 export default function DetailItem({
