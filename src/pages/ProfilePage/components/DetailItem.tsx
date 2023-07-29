@@ -26,7 +26,7 @@ export default function DetailItem({
   schedule,
   images,
 }: DetailItemProps) {
-  const commonTextStyle = "text-md opacity-70 w-full basis-1/2";
+  const commonTextStyle = "text-md w-full basis-1/2";
   const commonFlexContainerStyle = `flex mt-10 items-start ${
     techerDetails && "mt-4"
   }`;
@@ -57,7 +57,7 @@ export default function DetailItem({
               <div>18:00-19:00</div>
             </div>
             <div>
-              <div className="text-sm text-gray-600">MONDAY</div>
+              <div className="text-sm text-gray-600">TUESDAY</div>
               <div>18:00-19:00</div>
             </div>
           </div>
