@@ -1,9 +1,9 @@
 import MaterialIcon from "../../../common/MaterialIcon";
 
-interface scheduleProps{
-  day:string,
-  startTime:string,
-  endTime:string
+interface scheduleProps {
+  day: string;
+  startTime: string;
+  endTime: string;
 }
 interface DetailItemProps {
   title: string;
@@ -11,8 +11,9 @@ interface DetailItemProps {
   view?: boolean;
   tags?: string[];
   video?: string;
-  techerDetails?: Boolean
-  schedule?: scheduleProps
+  techerDetails?: Boolean;
+  schedule?: scheduleProps;
+  images?: string[];
 }
 
 export default function DetailItem({
@@ -22,10 +23,13 @@ export default function DetailItem({
   tags,
   video,
   techerDetails,
-  schedule
+  schedule,
+  images,
 }: DetailItemProps) {
   const commonTextStyle = "text-md opacity-70 w-full basis-1/2";
-  const commonFlexContainerStyle = `flex mt-10 items-start ${techerDetails && "mt-4"}`;
+  const commonFlexContainerStyle = `flex mt-10 items-start ${
+    techerDetails && "mt-4"
+  }`;
 
   return (
     <div className={commonFlexContainerStyle}>
@@ -33,24 +37,35 @@ export default function DetailItem({
       <div
         className={`${commonTextStyle} flex items-center hover:text-secondary hover:cursor-pointer`}
       >
-        {
-          schedule && (
-            <div className="flex flex-col gap-y-3">
-              <div>
+        {images && (
+          <div className="grid grid-cols-2 gap-5">
+            {images.map((item, index) => (
+              <div key={index}>
+                <img
+                  src={item}
+                  alt={`Image ${index + 1}`}
+                  className="w-full h-auto"
+                />
+              </div>
+            ))}
+          </div>
+        )}
+        {schedule && (
+          <div className="flex flex-col gap-y-3">
+            <div>
               <div className="text-sm text-gray-600">MONDAY</div>
               <div>18:00-19:00</div>
-              </div>
-              <div>
+            </div>
+            <div>
               <div className="text-sm text-gray-600">MONDAY</div>
               <div>18:00-19:00</div>
-              </div>
-              </div>
-          )
-        }
+            </div>
+          </div>
+        )}
         {video ? (
           <iframe
             title={title}
-            width="560"
+            width="100%"
             height="315"
             src={video.replace("watch?v=", "embed/")}
             allowFullScreen
