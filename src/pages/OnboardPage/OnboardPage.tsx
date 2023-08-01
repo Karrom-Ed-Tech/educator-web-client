@@ -7,7 +7,7 @@ import { twMerge } from "tailwind-merge";
 import AddTeacherSchedule from "./components/AddTeacherSchedule";
 const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
   {
-    title: "Enter Details",
+    title: "Center Details",
     inputs: [
       {
         name: "name",
@@ -20,34 +20,99 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
         type: "text",
       },
       {
-        name: "location",
-        title: "Enter the location of the company",
-      },
-      // {
-      //   name: "mobile",
-      //   title: "Phone number",
-      //   constraints: { pattern: `^(0|91)?[6-9][0-9]{9}$` },
-      // },
-      {
-        name: "name",
-        title: "Academy owner name",
+        name: "Address1",
+        title: "Address Line 1",
+        type: "text",
       },
       {
-        name: "id",
-        title: "Owner ID",
-        type: "number",
+        name: "Address2",
+        title: "Address Line 2",
+        type: "text",
+      },
+      {
+        name: "area",
+        title: "Area",
+        type: "text",
+      },
+      {
+        name: "city",
+        title: "City",
+        type: "text",
+      },
+      {
+        name: "pincode",
+        title: "Pincode",
+        type: "text",
+      },
+      {
+        name: "state",
+        title: "state",
+        type: "text",
+      },
+      {
+        name: "saluation",
+        title: "Saluation",
+        type: "text",
+      },
+      {
+        name: "firstname",
+        title: "First Name of the owner",
+        type: "text",
+      },
+      {
+        name: "lastname",
+        title: "Last Name of the owner",
+        type: "text",
+      },
+      {
+        name: "identification",
+        title: "Identification document of the owner",
+        type: "file",
+      },
+      {
+        name: "mobile",
+        title: "Phone number",
+        constraints: { pattern: `^(0|91)?[6-9][0-9]{9}$` },
+      },
+      {
+        name: "alternate",
+        title: "Alternate phone number",
+        constraints: { pattern: `^(0|91)?[6-9][0-9]{9}$` },
       },
       {
         name: "gstn",
-        title: "Company GSTN",
+        title: "Company GSTN registered?",
+        type: "checkbox",
       },
       {
-        name: "name",
-        title: "Name of the Bank of company",
+        name: "gstn",
+        title: "Company GSTN number?",
+        type: "text",
+      },
+      {
+        name: "cancelledCheck",
+        title: "Cancelled check of your bank",
+        type: "file",
       },
       {
         name: "number",
-        title: "Account Number",
+        title: "Account Number of your bank",
+        type: "text",
+      },
+      {
+        name: "payeeName",
+        title: "Payee name",
+        type: "text",
+      },
+      {
+        name: "IFSC code",
+        title: "IFSC code of your bank",
+        type: "text",
+      },
+      {
+        name: "branchAddress",
+        title: "Branch address of your bank",
+        type: "text",
       },
       {
         name: "status",
@@ -153,21 +218,21 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
     title: "Images/Videos",
     inputs: [
       {
-          name: "tourVideoUrl",
-          title: "Tour of your institute (YouTube Video)",
-          placeholder: "Provide a valid youtube video url",
-          type: "url",
-          constraints: {
-            pattern: `^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|v\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})`,
-          },
+        name: "tourVideoUrl",
+        title: "Tour of your institute (YouTube Video)",
+        placeholder: "Provide a valid youtube video url",
+        type: "url",
+        constraints: {
+          pattern: `^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|v\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})`,
+        },
       },
       {
-        name:"academyImages",
-        title:"Image of your academy",
-        type:""
-      }
-    ]
-  }
+        name: "academyImages",
+        title: "Image of your academy",
+        type: "",
+      },
+    ],
+  },
 ];
 
 export default function OnboardPage() {
@@ -183,7 +248,7 @@ export default function OnboardPage() {
   const currentFormRef = useRef() as React.MutableRefObject<HTMLFormElement>;
 
   function nextStepHandler() {
-    console.log(formData)
+    console.log(formData);
     // const isFormValid = currentFormRef.current.checkValidity();
     const isFormValid = true;
     if (isFormValid) {
@@ -260,9 +325,7 @@ export default function OnboardPage() {
         {currentStep == 2
           ? Array.from({ length: teacherDetailsCount }).map((_, index) => (
               <div key={index}>
-                <h3 className="text-2xl font-bold mb-4">
-                  Teacher {index+1}
-                </h3>
+                <h3 className="text-2xl font-bold mb-4">Teacher {index + 1}</h3>
                 {formSteps[2].inputs.map((input, i) => (
                   <RegistrationInput
                     key={i}
@@ -277,13 +340,13 @@ export default function OnboardPage() {
                     }}
                   />
                 ))}
-                <AddTeacherSchedule/>
+                <AddTeacherSchedule />
               </div>
             ))
           : formSteps[currentStep].inputs.map((input, i) => (
               <RegistrationInput
                 key={i}
-                multipleImages = {input.name=="academyImages"}
+                multipleImages={input.name == "academyImages"}
                 errorCheckFlag={errorCheckFlag}
                 value={(formData as any)[input.name]}
                 {...input}
@@ -296,12 +359,19 @@ export default function OnboardPage() {
               />
             ))}
       </form>
-      {
-        currentStep == 2 &&
-        <button type="button" onClick={addTeacherHandler} className="flex items-center justify-center">
-          <MaterialIcon codepoint="e145" className="p-2 border-rounded bg-black text-white mr-5"/> Add Teacher
+      {currentStep == 2 && (
+        <button
+          type="button"
+          onClick={addTeacherHandler}
+          className="flex items-center justify-center"
+        >
+          <MaterialIcon
+            codepoint="e145"
+            className="p-2 border-rounded bg-black text-white mr-5"
+          />{" "}
+          Add Teacher
         </button>
-      }
+      )}
       <div className="flex justify-end p-5">
         {currentStep !== 0 && (
           <button
