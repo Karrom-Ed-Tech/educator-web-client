@@ -145,8 +145,81 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
     ],
   },
   {
-    title: "Contact details",
+    title: "Educator page view",
     inputs: [
+      {
+        name: "centerName",
+        title: "Center name of your company?",
+        type: "text",
+      },
+      {
+        name: "logo",
+        title: "Brand logo of your company?",
+        type: "file",
+      },
+      {
+        name: "address1",
+        title: "Premise Address line 1",
+        type: "text",
+      },
+      {
+        name: "address2",
+        title: "Premise Address line 2",
+        type: "text",
+      },
+      {
+        name: "area",
+        title: "Area of your company?",
+        type: "text",
+      },
+      {
+        name: "city",
+        title: "City",
+        type: "text",
+      },
+      {
+        name: "pincode",
+        title: "Pincode",
+        type: "text",
+      },
+      {
+        name: "state",
+        title: "state",
+        type: "text",
+      },
+      {
+        name: "social",
+        type: "dropdown",
+        title: "Social Media handle",
+        placeholder: "Select from the below dropdown",
+        dropdown: ["Instagram", "Discord", "Facebook", "LinkedIn"],
+      },
+      {
+        name: "Activities",
+        type: "Activities offered",
+        title: "Social Media handle",
+        // placeholder: "Select from the below dropdown",
+        dropdown: ["Dance", "Singing", "Gymnastics", "Athletics"],
+      },
+      {
+        name: "Types of courses",
+        title: "Types of courses",
+        // placeholder: "Select from the below dropdown",
+        dropdown: ["Dance", "Singing", "Gymnastics", "Athletics"],
+      },
+      {
+        name: "Awards",
+        type: "text",
+        title: "Awards and Accolades",
+        placeholder: "your educators awards and accolades",
+        // dropdown: ["Dance", "Singing", "Gymnastics", "Athletics"],
+      },
+      {
+        name: "Awards",
+        type: "file",
+        title: "Awards and Accolades",
+        placeholder: "Select from the below dropdown",
+      },
       {
         name: "ownerContact",
         title: "Owner contact number",
@@ -193,10 +266,10 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
         type: "number",
         constraints: { min: 0, max: 80 },
       },
-      {
-        name: "awards",
-        title: "Awards & Accolades",
-      },
+      // {
+      //   name: "awards",
+      //   title: "Awards & Accolades",
+      // },
       {
         name: "activities",
         title: "Activities taught by teacher at centre",
