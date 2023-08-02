@@ -20,6 +20,13 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
         type: "text",
       },
       {
+        name: "status",
+        type: "dropdown",
+        title: "Establishment status",
+        placeholder: "Select from the below dropdown",
+        dropdown: ["SP", "LLC", "Not-registered"],
+      },
+      {
         name: "Address1",
         title: "Address Line 1",
         type: "text",
@@ -80,13 +87,13 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
         constraints: { pattern: `^(0|91)?[6-9][0-9]{9}$` },
       },
       {
-        name: "gstn",
-        title: "Company GSTN registered?",
+        name: "gstIn",
+        title: "Company GSTIN registered?",
         type: "checkbox",
       },
       {
-        name: "gstn",
-        title: "Company GSTN number?",
+        name: "gstIn",
+        title: "Company GSTIN number?",
         type: "text",
       },
       {
@@ -113,13 +120,6 @@ const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
         name: "branchAddress",
         title: "Branch address of your bank",
         type: "text",
-      },
-      {
-        name: "status",
-        type: "dropdown",
-        title: "Estalblishment status",
-        placeholder: "Select from the below dropdown",
-        dropdown: ["SP", "LLC", "Not-registered"],
       },
       {
         name: "ownerId",
@@ -450,13 +450,16 @@ export default function OnboardPage() {
           <button
             type="button"
             onClick={() => setCurrentStep((step) => (step > 1 ? step - 1 : 0))}
+            className="flex items-center gap-x-2 "
           >
+           <MaterialIcon codepoint="e5c8" className="inline rotate-180" />
             Back
           </button>
         )}
         <div className="flex-1" />
-        <button type="button" onClick={nextStepHandler}>
-          Next
+        <button type="button" onClick={nextStepHandler}  className="flex items-center gap-x-2">
+        Next
+          <MaterialIcon codepoint="e5c8" className="inline" />
         </button>
       </div>
     </form>
