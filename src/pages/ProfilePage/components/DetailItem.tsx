@@ -37,6 +37,7 @@ export default function DetailItem({
   const [modal, setModal] = useState();
   const [time, setTime] = useState("");
   const [day, setDay] = useState("");
+  const [editSchedule , setEditSchedule] = useState<Boolean>(false);
   const openAttendanceModal = (day: string, time: string) => {
     setDay(day);
     setTime(day);
@@ -45,6 +46,10 @@ export default function DetailItem({
 
   const closeModal = () => {
     setModalView(false);
+  }
+
+  const handleUpdateSchedule = async () =>{
+    setEditSchedule(false);
   }
 
   return (
@@ -67,26 +72,46 @@ export default function DetailItem({
           </div>
         )}
         {schedule && (
-          <div className="flex flex-col gap-y-3">
+          <div className="flex flex-row-reverse gap-y-3 item-start justify-between w-full">
+            <div>
+              {
+                !editSchedule &&
+                <div onClick={()=>{
+                  setEditSchedule(true)
+                }}>
+              <MaterialIcon codepoint="e3c9" className="text-primary"/>
+            </div>
+              }
+            </div>
+            <div className="flex flex-col gap-y-10">
+            <div className="flex flex-col gap-y-3">
             <div
               onClick={() => {
                 openAttendanceModal("Monday", "18:00-19:00");
               }}
             >
               <div className="text-sm text-gray-600">MONDAY</div>
-              <div>18:00-19:00</div>
+              {/* <div>18:00-19:00</div> */}
+              {
+                editSchedule ?
+                <input type="text" className="border-1 border-gray-300 rounded-lg px-2 py-1 w-40" value="18:00-19:00"/>
+                :
+                <div>18:00-19:00</div>
+              }
             </div>
-            <div  onClick={() => {
-                openAttendanceModal("Monday", "18:00-19:00");
-              }}>
-              <div className="text-sm text-gray-600">TUESDAY</div>
-              <div>18:00-19:00</div>
+            </div>
+            {
+              editSchedule &&
+              <div className="bg-front text-back text-center py-1" onClick={handleUpdateSchedule}>
+                Update schedule
+              </div>
+            }
             </div>
           </div>
         )}
         {
           modalView && 
-          <div className="flex items-center justify-center ">
+          <div className="flex items-center justify-center absolute">
               <AttendanceModal day={day} time={time} closeModal={closeModal}/>
             </div>
         }

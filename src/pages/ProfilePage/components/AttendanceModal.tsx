@@ -25,7 +25,7 @@ interface propTypes {
 
 export default function AttendanceModal(props:propTypes) {
     return (
-        <div className="absolute z-10 w-112 max-h-96 bg-gray-300 py-10 px-16 rounded-lg overflow-y-scroll  animate-fade">
+        <div className="absolute z-10 w-112 bg-gray-300 py-10 px-16 rounded-lg overflow-y-scroll animate-fade">
             <h2 className="font-bold">Mark Attendance</h2>
             <div className="flex flex-col text-gray-500 text-sm mb-10">
             <p>Date: 15-03-2023</p>
@@ -36,8 +36,9 @@ export default function AttendanceModal(props:propTypes) {
                 <div className="basis-1/2">Students</div>
                 <div className="basis-1/2">Attendance</div>
             </div>
+            <div className=" max-h-60 overflow-y-scroll  mb-10">
            {
-            names?.map((item , index)=>{
+               names?.map((item , index)=>{
                 return (
                     <div className="flex item-center justify-between mb-5">
                     <div className="basis-1/2">
@@ -47,7 +48,8 @@ export default function AttendanceModal(props:propTypes) {
                     </div>
                 )
             })
-           }
+        }
+        </div>
            <div className="flex items-center justify-between">
             <button className="py-2 px-5 bg-green bg-black text-white rounded-lg" onClick={props.closeModal}>
                 Ok
