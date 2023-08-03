@@ -57,12 +57,12 @@ export default function EachEdit(props: EachEditProps) {
                 *{val} already exists.
             </span>
           }
-          <div className="flex flex-wrap gap-5">
+          <div className="flex flex-wrap gap-5 my-10 py-5 px-3 bg-gray-200 rounded-lg h-48 max-h-30 overflow-y-scroll">
             {tags?.map((item, index) => {
               return (
-                <div className="bg-gray-200 p-2 rounded-md flex justify-center ">
+                <div className="bg-gray-300 p-2 rounded-md flex justify-center text-sm max-h-10">
                   {item}
-                  <span onClick={() => handleRemoveTag(index)}>
+                  <span onClick={() => handleRemoveTag(index)} className="h-">
                     <MaterialIcon
                       codepoint="e5cd"
                       className="ml-5 cursor-pointer"

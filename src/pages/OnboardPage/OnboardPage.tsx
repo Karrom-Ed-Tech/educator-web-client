@@ -5,304 +5,351 @@ import RegistrationInput, {
 import MaterialIcon from "../../common/MaterialIcon";
 import { twMerge } from "tailwind-merge";
 import AddTeacherSchedule from "./components/AddTeacherSchedule";
-const formSteps: { title: string; inputs: RegistrationInputProps[] }[] = [
+const formSteps: {
+  title: string;
+  content: {
+    heading: string | null;
+    inputs: RegistrationInputProps[];
+    // component?: any
+  }[];
+}[] = [
   {
     title: "Center Details",
-    inputs: [
+    content: [
       {
-        name: "name",
-        title: "Brand Name of the Company",
-        type: "text",
+        heading: "Company Registration Details",
+        inputs: [
+          {
+            name: "status",
+            type: "dropdown",
+            title: "Establishment status",
+            placeholder: "Select from the below dropdown",
+            dropdown: [
+              "Private Limited Company",
+              "Public Limited Comapny",
+              "Partnerships",
+              "Sole proprietorship",
+              "LLP",
+              "One Person Company",
+              "Section 8 Company",
+              "Not-registered",
+            ],
+          },
+          {
+            name: "name",
+            title: "BRegistered Company Name",
+            type: "text",
+          },
+          {
+            name: "Address1",
+            title: "Registered Address Line 1",
+            type: "text",
+          },
+          {
+            name: "Address2",
+            title: "Address Line 2",
+            type: "text",
+          },
+          {
+            name: "area",
+            title: "Area",
+            type: "text",
+          },
+          {
+            name: "city",
+            title: "City",
+            type: "text",
+          },
+          {
+            name: "pincode",
+            title: "Pincode",
+            type: "text",
+            constraints: { accept: "^[0-9]+$" },
+          },
+          {
+            name: "state",
+            title: "state",
+            type: "text",
+          },
+        ],
       },
       {
-        name: "name",
-        title: "Registered Company Name",
-        type: "text",
+        heading: "Ownership details",
+        inputs: [
+          {
+            name: "saluation",
+            title: "Saluation",
+            type: "text",
+          },
+          {
+            name: "firstname",
+            title: "First Name",
+            type: "text",
+          },
+          {
+            name: "lastname",
+            title: "Last Name",
+            type: "text",
+          },
+          {
+            name: "identification",
+            title: "Identification document",
+            type: "file",
+          },
+          {
+            name: "mobile",
+            title: "Mobile No",
+            constraints: { pattern: `^(0|91)?[6-9][0-9]{9}$` },
+          },
+          {
+            name: "alternate",
+            title: "Alternate Mobile No",
+            constraints: { pattern: `^(0|91)?[6-9][0-9]{9}$` },
+          },
+          {
+            name: "email",
+            title: "Email Address",
+            constraints: {
+              accept: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$",
+            },
+          },
+        ],
       },
       {
-        name: "status",
-        type: "dropdown",
-        title: "Establishment status",
-        placeholder: "Select from the below dropdown",
-        dropdown: ["SP", "LLC", "Not-registered"],
+        heading: "GSTN Details",
+        inputs: [
+          {
+            name: "gstnRegistered",
+            title: "GST registered",
+            type: "checkbox",
+            optional: true,
+          },
+          {
+            name: "gstnRegistered",
+            title: "GST Number",
+            type: "text",
+          },
+        ],
       },
       {
-        name: "Address1",
-        title: "Address Line 1",
-        type: "text",
+        heading: "Bank Details",
+        inputs: [
+          {
+            name: "cancelledCheque",
+            title: "Cancelled cheque",
+            type: "file",
+          },
+          {
+            name: "accountNumber",
+            title: "Bank A/C No.",
+            type: "text",
+            constraints: { accept: "^[0-9]+$" },
+          },
+          {
+            name: "payeeName",
+            title: "Payee Name",
+            type: "text",
+          },
+          {
+            name: "ifscCode",
+            title: "IFSC Code",
+            type: "text",
+          },
+          {
+            name: "Branch",
+            title: "Branch",
+            type: "text",
+          },
+        ],
       },
-      {
-        name: "Address2",
-        title: "Address Line 2",
-        type: "text",
-      },
-      {
-        name: "area",
-        title: "Area",
-        type: "text",
-      },
-      {
-        name: "city",
-        title: "City",
-        type: "text",
-      },
-      {
-        name: "pincode",
-        title: "Pincode",
-        type: "text",
-      },
-      {
-        name: "state",
-        title: "state",
-        type: "text",
-      },
-      {
-        name: "saluation",
-        title: "Saluation",
-        type: "text",
-      },
-      {
-        name: "firstname",
-        title: "First Name of the owner",
-        type: "text",
-      },
-      {
-        name: "lastname",
-        title: "Last Name of the owner",
-        type: "text",
-      },
-      {
-        name: "identification",
-        title: "Identification document of the owner",
-        type: "file",
-      },
-      {
-        name: "mobile",
-        title: "Phone number",
-        constraints: { pattern: `^(0|91)?[6-9][0-9]{9}$` },
-      },
-      {
-        name: "alternate",
-        title: "Alternate phone number",
-        constraints: { pattern: `^(0|91)?[6-9][0-9]{9}$` },
-      },
-      {
-        name: "gstIn",
-        title: "Company GSTIN registered?",
-        type: "checkbox",
-      },
-      {
-        name: "gstIn",
-        title: "Company GSTIN number?",
-        type: "text",
-      },
-      {
-        name: "cancelledCheck",
-        title: "Cancelled check of your bank",
-        type: "file",
-      },
-      {
-        name: "number",
-        title: "Account Number of your bank",
-        type: "text",
-      },
-      {
-        name: "payeeName",
-        title: "Payee name",
-        type: "text",
-      },
-      {
-        name: "IFSC code",
-        title: "IFSC code of your bank",
-        type: "text",
-      },
-      {
-        name: "branchAddress",
-        title: "Branch address of your bank",
-        type: "text",
-      },
-      {
-        name: "ownerId",
-        title: "Identity proof : Adhaar card/ Pan card / VoterId",
-        type: "file",
-        constraints: {
-          accept:
-            "image/jpeg,image/png,application/pdf,application/msword,image/x-eps",
-        },
-      },
-      {
-        name: "social",
-        type: "dropdown",
-        title: "Social Media handle",
-        placeholder: "Select from the below dropdown",
-        dropdown: ["Instagram", "Discord", "Facebook", "LinkedIn"],
-      },
-      // {
-      //   name: "teachers",
-      //   type: "number",
-      //   title: "Enter Number of Teachers",
-      // },
     ],
   },
   {
     title: "Educator page view",
-    inputs: [
+    content: [
       {
-        name: "centerName",
-        title: "Center name of your company?",
-        type: "text",
-      },
-      {
-        name: "logo",
-        title: "Brand logo of your company?",
-        type: "file",
-      },
-      {
-        name: "address1",
-        title: "Premise Address line 1",
-        type: "text",
-      },
-      {
-        name: "address2",
-        title: "Premise Address line 2",
-        type: "text",
-      },
-      {
-        name: "area",
-        title: "Area of your company?",
-        type: "text",
-      },
-      {
-        name: "city",
-        title: "City",
-        type: "text",
-      },
-      {
-        name: "pincode",
-        title: "Pincode",
-        type: "text",
-      },
-      {
-        name: "state",
-        title: "state",
-        type: "text",
-      },
-      {
-        name: "social",
-        type: "dropdown",
-        title: "Social Media handle",
-        placeholder: "Select from the below dropdown",
-        dropdown: ["Instagram", "Discord", "Facebook", "LinkedIn"],
-      },
-      {
-        name: "Activities",
-        type: "Activities offered",
-        title: "Social Media handle",
-        // placeholder: "Select from the below dropdown",
-        dropdown: ["Dance", "Singing", "Gymnastics", "Athletics"],
-      },
-      {
-        name: "Types of courses",
-        title: "Types of courses",
-        // placeholder: "Select from the below dropdown",
-        dropdown: ["Dance", "Singing", "Gymnastics", "Athletics"],
-      },
-      {
-        name: "Awards",
-        type: "text",
-        title: "Awards and Accolades",
-        placeholder: "your educators awards and accolades",
-        // dropdown: ["Dance", "Singing", "Gymnastics", "Athletics"],
-      },
-      {
-        name: "Awards",
-        type: "file",
-        title: "Awards and Accolades",
-        placeholder: "Select from the below dropdown",
-      },
-      {
-        name: "ownerContact",
-        title: "Owner contact number",
-        placeholder: "Mobile number of owner",
-        constraints: { pattern: `^(0|91|\\+91)?[6-9][0-9]{9}$` },
-      },
-      {
-        name: "centerContact",
-        title: "Center contact number",
-        placeholder: "Mobile number of center",
-        constraints: { pattern: `^(0|91|\\+91)?[6-9][0-9]{9}$` },
-      },
-      {
-        name: "alternateContact",
-        title: "Alternate contact number",
-        placeholder: "Any alternate contact number ?",
-        constraints: { pattern: `^(0|91|\\+91)?[6-9][0-9]{9}$` },
-        optional: true,
+        heading: "Company/Brand Details",
+        inputs: [
+          {
+            name: "centerName",
+            title: "Center name",
+            type: "text",
+          },
+          {
+            name: "logo",
+            title: "Brand logo",
+            type: "file",
+          },
+          {
+            name: "premiseAddress1",
+            title: "Premise Address line 1",
+            type: "text",
+          },
+          {
+            name: "premiseAddress2",
+            title: "Premise Address line 2",
+            type: "text",
+          },
+          {
+            name: "area",
+            title: "Area",
+            type: "text",
+          },
+          {
+            name: "city",
+            title: "City",
+            type: "text",
+          },
+          {
+            name: "pincode",
+            title: "Pincode",
+            type: "text",
+            constraints: { accept: "^[0-9]+$" },
+          },
+          {
+            name: "state",
+            title: "state",
+            type: "text",
+          },
+          {
+            name: "social",
+            type: "dropdown",
+            title: "Social Media handle",
+            placeholder: "Select from the below dropdown",
+            dropdown: ["Instagram", "Discord", "Facebook", "LinkedIn"],
+          },
+          {
+            name: "Activities",
+            type: "Activities offered",
+            title: "Social Media handle",
+            // placeholder: "Select from the below dropdown",
+            dropdown: ["Dance", "Singing", "Gymnastics", "Athletics"],
+          },
+          {
+            name: "Types of courses",
+            title: "Types of courses",
+            // placeholder: "Select from the below dropdown",
+            dropdown: ["Dance", "Singing", "Gymnastics", "Athletics"],
+          },
+          {
+            name: "Awards",
+            type: "text",
+            title: "Awards and Accolades",
+            placeholder: "your educators awards and accolades",
+            // dropdown: ["Dance", "Singing", "Gymnastics", "Athletics"],
+          },
+          {
+            name: "Awards",
+            type: "file",
+            title: "Awards and Accolades",
+            placeholder: "Select from the below dropdown",
+          },
+          {
+            name: "ownerContact",
+            title: "Owner contact number",
+            placeholder: "Mobile number of owner",
+            constraints: { pattern: `^(0|91|\\+91)?[6-9][0-9]{9}$` },
+          },
+          {
+            name: "centerContact",
+            title: "Center contact number",
+            placeholder: "Mobile number of center",
+            constraints: { pattern: `^(0|91|\\+91)?[6-9][0-9]{9}$` },
+          },
+          {
+            name: "alternateContact",
+            title: "Alternate contact number",
+            placeholder: "Any alternate contact number ?",
+            constraints: { pattern: `^(0|91|\\+91)?[6-9][0-9]{9}$` },
+            optional: true,
+          },
+        ],
       },
     ],
   },
 
   {
-    title: "Teacher's Profile",
-    inputs: [
+    title: "Educator Details",
+    content: [
       {
-        name: "name",
-        title: "Teacher Name",
-        placeholder: "Enter name with salutation",
-      },
-      {
-        name: "Qualification",
-        title: "Enter qualification of the teacher",
-        placeholder: "You'all have to attach the document",
-      },
-      {
-        name: "QualificationDoc",
-        title: "Upload qualification of the teacher",
-        type: "file",
-      },
-      {
-        name: "experience",
-        title: "How many years of experience does teacher has?",
-        type: "number",
-        constraints: { min: 0, max: 80 },
-      },
-      // {
-      //   name: "awards",
-      //   title: "Awards & Accolades",
-      // },
-      {
-        name: "activities",
-        title: "Activities taught by teacher at centre",
-        type: "dropdown",
-        placeholder: "Select multiple options from the dropdown",
-        dropdown: [
-          "Swimming",
-          "Basketball",
-          "Handball",
-          "Cricket",
-          "Baseball",
-          "Badminton",
+        heading: null,
+        inputs: [
+          {
+            name: "name",
+            title: "Educator Name",
+            placeholder: "Enter name with salutation",
+            type: "text",
+          },
+          {
+            name: "educatorProfilePic",
+            title: "Educator Profile Photo",
+            type: "file",
+          },
+          {
+            name:"activitiesTaught",
+            title:"Activities Taught",
+            type:"dropdown",
+            dropdown: [
+              "Swimming",
+              "Basketball",
+              "Handball",
+              "Cricket",
+              "Baseball",
+              "Badminton",
+            ],
+            multiple: true,
+          },
+          {
+            name: "QualificationOrCertification",
+            title: "QualificationOrCertification",
+            placeholder: "text",
+          },
+          // {
+          //   name: "QualificationDoc",
+          //   title: "Upload qualification of the teacher",
+          //   type: "file",
+          // },
+          {
+            name: "No. of years of teaching experience",
+            title: "No. of years of teaching experience",
+            type: "number",
+            constraints: { min: 0, max: 80 },
+          },
+          {
+            name: "studentsTaught",
+            title: "No. of students taught",
+            type: "number",
+            constraints: { min: 0},
+          },
+          {
+            name: "awards",
+            title: "Awards & Accolades",
+          },
         ],
-        multiple: true,
       },
     ],
   },
   {
     title: "Images/Videos",
-    inputs: [
+    content: [
       {
-        name: "tourVideoUrl",
-        title: "Tour of your institute (YouTube Video)",
-        placeholder: "Provide a valid youtube video url",
-        type: "url",
-        constraints: {
-          pattern: `^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|v\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})`,
-        },
-      },
-      {
-        name: "academyImages",
-        title: "Image of your academy",
-        type: "",
+        heading: null,
+        inputs: [
+          {
+            name: "tourVideoUrl",
+            title: "Tour of your institute (YouTube Video)",
+            placeholder: "Provide a valid youtube video url",
+            type: "url",
+            constraints: {
+              pattern: `^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|v\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})`,
+            },
+          },
+          {
+            name: "academyImages",
+            title: "Image of your academy",
+            type: "",
+          },
+        ],
       },
     ],
   },
@@ -313,6 +360,7 @@ export default function OnboardPage() {
   const [formData, setFormData] = useState<object>({});
   const [errorCheckFlag, setErrorCheckFlag] = useState(false);
   const [teacherDetailsCount, setTeacherDetailsCount] = useState<number>(1);
+  const [bankError, setBankError] = useState<Boolean>(false);
 
   function addTeacherHandler() {
     setTeacherDetailsCount((count) => count + 1);
@@ -324,6 +372,19 @@ export default function OnboardPage() {
     console.log(formData);
     // const isFormValid = currentFormRef.current.checkValidity();
     const isFormValid = true;
+    if (currentStep == 0) {
+      if (
+        !formData.cancelledCheque &&
+        (!formData.accountNumber && !formData.ifscCode,
+        !formData.payeeName && !formData.branch)
+      ) {
+        setBankError(true);
+        setTimeout(() => {
+          setBankError(false);
+        }, 4000);
+        return;
+      }
+    }
     if (isFormValid) {
       setCurrentStep((step) =>
         step < formSteps.length - 1 ? step + 1 : formSteps.length - 1
@@ -399,7 +460,7 @@ export default function OnboardPage() {
           ? Array.from({ length: teacherDetailsCount }).map((_, index) => (
               <div key={index}>
                 <h3 className="text-2xl font-bold mb-4">Teacher {index + 1}</h3>
-                {formSteps[2].inputs.map((input, i) => (
+                {formSteps[2].content[0].inputs.map((input, i) => (
                   <RegistrationInput
                     key={i}
                     errorCheckFlag={errorCheckFlag}
@@ -416,21 +477,28 @@ export default function OnboardPage() {
                 <AddTeacherSchedule />
               </div>
             ))
-          : formSteps[currentStep].inputs.map((input, i) => (
-              <RegistrationInput
-                key={i}
-                multipleImages={input.name == "academyImages"}
-                errorCheckFlag={errorCheckFlag}
-                value={(formData as any)[input.name]}
-                {...input}
-                onChange={(event) => {
-                  setFormData((prev) => ({
-                    ...prev,
-                    [input.name]: event.target.value,
-                  }));
-                }}
-              />
-            ))}
+          : formSteps[currentStep].content.map((item, index) => {
+              return (
+                <div>
+                  <h2 className="my-5 font-bold">{item.heading}</h2>
+                  {item.inputs.map((input, i) => (
+                    <RegistrationInput
+                      key={i}
+                      multipleImages={input.name == "academyImages"}
+                      errorCheckFlag={errorCheckFlag}
+                      value={(formData as any)[input.name]}
+                      {...input}
+                      onChange={(event) => {
+                        setFormData((prev) => ({
+                          ...prev,
+                          [input.name]: event.target.value,
+                        }));
+                      }}
+                    />
+                  ))}
+                </div>
+              );
+            })}
       </form>
       {currentStep == 2 && (
         <button
@@ -452,13 +520,22 @@ export default function OnboardPage() {
             onClick={() => setCurrentStep((step) => (step > 1 ? step - 1 : 0))}
             className="flex items-center gap-x-2 "
           >
-           <MaterialIcon codepoint="e5c8" className="inline rotate-180" />
+            <MaterialIcon codepoint="e5c8" className="inline rotate-180" />
             Back
           </button>
         )}
         <div className="flex-1" />
-        <button type="button" onClick={nextStepHandler}  className="flex items-center gap-x-2">
-        Next
+        {bankError && (
+          <p className="text-red-400">
+            *Either upload cancelled cheque or bank details.
+          </p>
+        )}
+        <button
+          type="button"
+          onClick={nextStepHandler}
+          className="flex items-center gap-x-2 ml-10"
+        >
+          Next
           <MaterialIcon codepoint="e5c8" className="inline" />
         </button>
       </div>
