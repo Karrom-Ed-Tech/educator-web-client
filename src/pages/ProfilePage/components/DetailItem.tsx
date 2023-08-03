@@ -1,4 +1,6 @@
+import { useState } from "react";
 import MaterialIcon from "../../../common/MaterialIcon";
+import AttendanceModal from "./AttendanceModal";
 
 interface scheduleProps {
   day: string;
@@ -12,7 +14,7 @@ interface DetailItemProps {
   tags?: string[];
   video?: string;
   techerDetails?: Boolean;
-  schedule?: scheduleProps;
+  schedule?: scheduleProps[];
   images?: string[];
 }
 
@@ -30,6 +32,20 @@ export default function DetailItem({
   const commonFlexContainerStyle = `flex mt-10 items-start ${
     techerDetails && "mt-4"
   }`;
+
+  const [modalView, setModalView] = useState<Boolean>(false);
+  const [modal, setModal] = useState();
+  const [time, setTime] = useState("");
+  const [day, setDay] = useState("");
+  const openAttendanceModal = (day: string, time: string) => {
+    setDay(day);
+    setTime(day);
+    setModalView(true);
+  };
+
+  const closeModal = () => {
+    setModalView(false);
+  }
 
   return (
     <div className={commonFlexContainerStyle}>
@@ -52,16 +68,28 @@ export default function DetailItem({
         )}
         {schedule && (
           <div className="flex flex-col gap-y-3">
-            <div>
+            <div
+              onClick={() => {
+                openAttendanceModal("Monday", "18:00-19:00");
+              }}
+            >
               <div className="text-sm text-gray-600">MONDAY</div>
               <div>18:00-19:00</div>
             </div>
-            <div>
+            <div  onClick={() => {
+                openAttendanceModal("Monday", "18:00-19:00");
+              }}>
               <div className="text-sm text-gray-600">TUESDAY</div>
               <div>18:00-19:00</div>
             </div>
           </div>
         )}
+        {
+          modalView && 
+          <div className="flex items-center justify-center ">
+              <AttendanceModal day={day} time={time} closeModal={closeModal}/>
+            </div>
+        }
         {video ? (
           <iframe
             title={title}

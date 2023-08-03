@@ -5,7 +5,7 @@ const data = [
   {
     heading: "Age Groups",
     title: "Dropdown for activity Suitable for:",
-    availableTags: ["5-10", "10-20", "<30", ">30 & <50"],
+    availableTags: ["5-10", "10-20", "<30", ">30 & <50", ">30 & <50", ">30 & <50", ">30 & <50", ">30 & <50"],
   },
   {
     heading: "Teacher Activities",

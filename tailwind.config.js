@@ -45,6 +45,15 @@ export default {
       content: {
         visible: '" "',
       },
+      animation: {
+        fade: "fadeIn 0.4s ease-out",
+      },
+      keyframes: (theme) => ({
+        fadeIn: {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
+        },
+      }),
     },
   },
   plugins: [],
