@@ -5,12 +5,13 @@ import RegistrationInput, {
 import MaterialIcon from "../../common/MaterialIcon";
 import { twMerge } from "tailwind-merge";
 import AddTeacherSchedule from "./components/AddTeacherSchedule";
+import EducatorPage from "./components/EducatorPage";
 const formSteps: {
   title: string;
   content: {
-    heading: string | null;
-    inputs: RegistrationInputProps[];
-    // component?: any
+    heading?: string | null;
+    inputs?: RegistrationInputProps[];
+    component?: any;
   }[];
 }[] = [
   {
@@ -95,6 +96,7 @@ const formSteps: {
             name: "identification",
             title: "Identification document",
             type: "file",
+            constraints: { accept: "jpeg/pdf" },
           },
           {
             name: "mobile",
@@ -166,119 +168,45 @@ const formSteps: {
   },
   {
     title: "Educator page view",
-    content: [
+    content : [
       {
-        heading: "Company/Brand Details",
-        inputs: [
-          {
-            name: "centerName",
-            title: "Center name",
-            type: "text",
-          },
-          {
-            name: "logo",
-            title: "Brand logo",
-            type: "file",
-          },
-          {
-            name: "premiseAddress1",
-            title: "Premise Address line 1",
-            type: "text",
-          },
-          {
-            name: "premiseAddress2",
-            title: "Premise Address line 2",
-            type: "text",
-          },
-          {
-            name: "area",
-            title: "Area",
-            type: "text",
-          },
-          {
-            name: "city",
-            title: "City",
-            type: "text",
-          },
-          {
-            name: "pincode",
-            title: "Pincode",
-            type: "text",
-            constraints: { accept: "^[0-9]+$" },
-          },
-          {
-            name: "state",
-            title: "state",
-            type: "text",
-          },
-          {
-            name: "social",
-            type: "dropdown",
-            title: "Social Media handle",
-            placeholder: "Select from the below dropdown",
-            dropdown: ["Instagram", "Discord", "Facebook", "LinkedIn"],
-          },
-          {
-            name: "Activities",
-            type: "Activities offered",
-            title: "Social Media handle",
-            // placeholder: "Select from the below dropdown",
-            dropdown: ["Dance", "Singing", "Gymnastics", "Athletics"],
-          },
-          {
-            name: "Types of courses",
-            title: "Types of courses",
-            // placeholder: "Select from the below dropdown",
-            dropdown: ["Dance", "Singing", "Gymnastics", "Athletics"],
-          },
-          {
-            name: "Awards",
-            type: "text",
-            title: "Awards and Accolades",
-            placeholder: "your educators awards and accolades",
-            // dropdown: ["Dance", "Singing", "Gymnastics", "Athletics"],
-          },
-          {
-            name: "Awards",
-            type: "file",
-            title: "Awards and Accolades",
-            placeholder: "Select from the below dropdown",
-          },
-          {
-            name: "ownerContact",
-            title: "Owner contact number",
-            placeholder: "Mobile number of owner",
-            constraints: { pattern: `^(0|91|\\+91)?[6-9][0-9]{9}$` },
-          },
-          {
-            name: "centerContact",
-            title: "Center contact number",
-            placeholder: "Mobile number of center",
-            constraints: { pattern: `^(0|91|\\+91)?[6-9][0-9]{9}$` },
-          },
-          {
-            name: "alternateContact",
-            title: "Alternate contact number",
-            placeholder: "Any alternate contact number ?",
-            constraints: { pattern: `^(0|91|\\+91)?[6-9][0-9]{9}$` },
-            optional: true,
-          },
-        ],
-      },
-    ],
+        component : <EducatorPage/>
+      }
+    ]
   },
 
   {
     title: "Educator Details",
     content: [
       {
-        heading: null,
+        heading: "Educator name",
         inputs: [
           {
-            name: "name",
-            title: "Educator Name",
-            placeholder: "Enter name with salutation",
+            name: "salutation",
+            title: "Salutation",
+            placeholder: "John",
+            type: "dropdown",
+            lengthDivide : 4,
+            dropdown: [
+              "Mr.",
+              "Mrs.",
+              "Ms.",
+              "other"
+            ],
+          },
+          {
+            name: "firstName",
+            title: "First Name",
+            placeholder: "John",
             type: "text",
+            lengthDivide : 4
+          },
+          {
+            name: "lastName",
+            title: "Last Name",
+            placeholder: "Doe",
+            type: "text",
+            lengthDivide : 3
           },
           {
             name: "educatorProfilePic",
@@ -286,9 +214,9 @@ const formSteps: {
             type: "file",
           },
           {
-            name:"activitiesTaught",
-            title:"Activities Taught",
-            type:"dropdown",
+            name: "activitiesTaught",
+            title: "Activities Taught",
+            type: "dropdown",
             dropdown: [
               "Swimming",
               "Basketball",
@@ -301,8 +229,8 @@ const formSteps: {
           },
           {
             name: "QualificationOrCertification",
-            title: "QualificationOrCertification",
-            placeholder: "text",
+            title: "Qualification/Certification",
+            placeholder: "Qualifications or certificates teacher has",
           },
           // {
           //   name: "QualificationDoc",
@@ -319,7 +247,7 @@ const formSteps: {
             name: "studentsTaught",
             title: "No. of students taught",
             type: "number",
-            constraints: { min: 0},
+            constraints: { min: 0 },
           },
           {
             name: "awards",
@@ -355,9 +283,18 @@ const formSteps: {
   },
 ];
 
+interface FormDataInterface {
+  cancelledCheque?: boolean;
+  accountNumber?: string;
+  ifscCode?: string;
+  payeeName?: string;
+  branch?: string;
+  [key: string]: any;
+}
+
 export default function OnboardPage() {
   const [currentStep, setCurrentStep] = useState(0);
-  const [formData, setFormData] = useState<object>({});
+  const [formData, setFormData] = useState<FormDataInterface>({});
   const [errorCheckFlag, setErrorCheckFlag] = useState(false);
   const [teacherDetailsCount, setTeacherDetailsCount] = useState<number>(1);
   const [bankError, setBankError] = useState<Boolean>(false);
@@ -375,8 +312,10 @@ export default function OnboardPage() {
     if (currentStep == 0) {
       if (
         !formData.cancelledCheque &&
-        (!formData.accountNumber && !formData.ifscCode,
-        !formData.payeeName && !formData.branch)
+        !formData.accountNumber &&
+        !formData.ifscCode &&
+        !formData.payeeName &&
+        !formData.branch
       ) {
         setBankError(true);
         setTimeout(() => {
@@ -456,49 +395,55 @@ export default function OnboardPage() {
         ref={currentFormRef}
         className="flex-1 flex flex-col items-stretch px-[6vw] gap-y-8 py-8"
       >
-        {currentStep == 2
-          ? Array.from({ length: teacherDetailsCount }).map((_, index) => (
-              <div key={index}>
-                <h3 className="text-2xl font-bold mb-4">Teacher {index + 1}</h3>
-                {formSteps[2].content[0].inputs.map((input, i) => (
+        {currentStep === 1 ? (
+          <EducatorPage />
+        ) : currentStep === 2 ? (
+          Array.from({ length: teacherDetailsCount }).map((_, index) => (
+            <div key={index}>
+              <h3 className="text-2xl font-bold mb-4">Educator {index + 1}</h3>
+              <div className="flex w-full flex-wrap justify-between gap-x-5">
+              {formSteps[2].content[0].inputs &&
+                formSteps[2]?.content[0].inputs.map((input, i) => (
                   <RegistrationInput
-                    key={i}
-                    errorCheckFlag={errorCheckFlag}
-                    value={(formData as any)[`${input.name}_${index}`]}
-                    {...input}
-                    onChange={(event) => {
-                      setFormData((prev) => ({
-                        ...prev,
-                        [`${input.name}_${index}`]: event.target.value,
-                      }));
-                    }}
+                  key={i}
+                  errorCheckFlag={errorCheckFlag}
+                  value={(formData as any)[`${input.name}_${index}`]}
+                  {...input}
+                  onChange={(event) => {
+                    setFormData((prev) => ({
+                      ...prev,
+                      [`${input.name}_${index}`]: event.target.value,
+                    }));
+                  }}
+                  lengthDivide={input?.lengthDivide}
                   />
-                ))}
-                <AddTeacherSchedule />
-              </div>
-            ))
-          : formSteps[currentStep].content.map((item, index) => {
-              return (
-                <div>
-                  <h2 className="my-5 font-bold">{item.heading}</h2>
-                  {item.inputs.map((input, i) => (
-                    <RegistrationInput
-                      key={i}
-                      multipleImages={input.name == "academyImages"}
-                      errorCheckFlag={errorCheckFlag}
-                      value={(formData as any)[input.name]}
-                      {...input}
-                      onChange={(event) => {
-                        setFormData((prev) => ({
-                          ...prev,
-                          [input.name]: event.target.value,
-                        }));
-                      }}
-                    />
                   ))}
+              <AddTeacherSchedule />
                 </div>
-              );
-            })}
+            </div>
+          ))
+        ) : (
+          formSteps[currentStep].content.map((item, index) => (
+            <div key={index}>
+              <h2 className="my-5 font-bold">{item.heading}</h2>
+              {item.inputs?.map((input, i) => (
+                <RegistrationInput
+                  key={i}
+                  multipleImages={input.name === "academyImages"}
+                  errorCheckFlag={errorCheckFlag}
+                  value={(formData as any)[input.name]}
+                  {...input}
+                  onChange={(event) => {
+                    setFormData((prev) => ({
+                      ...prev,
+                      [input.name]: event.target.value,
+                    }));
+                  }}
+                />
+              ))}
+            </div>
+          ))
+        )}
       </form>
       {currentStep == 2 && (
         <button

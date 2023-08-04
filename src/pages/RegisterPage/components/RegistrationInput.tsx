@@ -26,7 +26,8 @@ export interface RegistrationInputProps {
   value?: any;
   multipleImages?: boolean;
   onSelectionChange?: (selectedItem: string) => void;
-  lengthHalf?: Boolean;
+  // lengthHalf?: Boolean;
+  lengthDivide?:number
 }
 
 export default function RegistrationInput(props: RegistrationInputProps) {
@@ -115,7 +116,7 @@ export default function RegistrationInput(props: RegistrationInputProps) {
     : [];
 
   return (
-    <>
+    <div className={props.lengthDivide ? `basis-1/${props.lengthDivide} mb-5` : "w-full mb-5"}>
       {props.preview && (
         <img
           className="w-[10vw] mx-auto aspect-square object-cover"
@@ -125,7 +126,6 @@ export default function RegistrationInput(props: RegistrationInputProps) {
       <div
         className={twMerge(
           "relative flex items-center py-4 px-6 border-2 border-front border-opacity-20 mobile:flex-colmobile:items-start animate-[grow-in_300ms]",
-          props.lengthHalf && "basis-1/2",
           selectedOnce &&
             !inputRef.current.checkValidity() &&
             "border-red-500 border-opacity-75",
@@ -195,17 +195,26 @@ export default function RegistrationInput(props: RegistrationInputProps) {
             }}
             ref={dropdownRef}
           >
-            <div className="text-secondary">
-              {props.multiple && selectedOptions.length > 0
-                ? selectedOptions.join(", ")
-                : selectedOptions.length === 1
-                ? selectedOptions[0]
-                : props.placeholder}
-            </div>
             <MaterialIcon
               codepoint="e5cf"
               className="text-secondary text-2xl"
             />
+            <div className="text-secondary flex gap-x-3 flex-wrap">
+              {/* {props.multiple && selectedOptions.length > 0
+                ? selectedOptions.join(", ")
+                : selectedOptions.length === 1
+                ? selectedOptions[0]
+                : props.placeholder} */}
+              {props.multiple && selectedOptions.length > 0
+                ? selectedOptions.map((item, i) => (
+                    <div key={i} className="bg-gray-200 px-2 py-1 rounded-full">
+                      {item}
+                    </div>
+                  ))
+                : selectedOptions.length === 1
+                ? selectedOptions[0]
+                : props.placeholder}
+            </div>
             <div
               className={`flex flex-col absolute top-10 left-6 z-10 bg-secondary w-max text-back px-4 pt-2 pb-3 min-w-[30%] rounded-xl backdrop-blur-xl ${
                 showDropdown ? "" : "hidden"
@@ -264,6 +273,6 @@ export default function RegistrationInput(props: RegistrationInputProps) {
         {props.title}
       </div> */}
       </div>
-    </>
+    </div>
   );
 }

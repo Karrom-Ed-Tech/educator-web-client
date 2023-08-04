@@ -91,7 +91,7 @@ export default function AddTeacherSchedule() {
 
 
   return (
-    <div>
+    <div className="w-full">
       <RegistrationInput
         name="day"
         type="dropdown"
@@ -109,24 +109,24 @@ export default function AddTeacherSchedule() {
         value={selectedDay}
         onSelectionChange={handleDropdownChange}
       />
-      <div>
+      <div className="flex justify-between gap-x-5">
         <RegistrationInput
           name="startTime"
           title="Start time"
-          placeholder="Enter start time for the given date eg: 07:00 , 18:00"
+          placeholder="Enter time eg: 07:00 , 18:00"
           value={selectedStartTime}
           onChange={(e) => setSelectedStartTime(e.target.value)}
           constraints={constraints}
-          lengthHalf={true}
+          lengthDivide={2}
         />
         <RegistrationInput
           name="endTime"
           title="End time"
-          placeholder="Enter end time for the given date eg: 07:00 , 18:00"
+          placeholder="Enter ime eg: 08:00 , 19:00"
           value={selectedEndTime}
           onChange={(e) => setSelectedEndTime(e.target.value)}
           constraints={constraints}
-          lengthHalf={true}
+          lengthDivide={2}
         />
       </div>
       <button
