@@ -139,6 +139,7 @@ export default function EducatorPage(){
                       [input.name]: event.target.value,
                     }));
                   }}
+                  isVisible={true}
                     />
                   // </div>
                 )

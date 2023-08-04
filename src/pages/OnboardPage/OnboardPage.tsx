@@ -1,4 +1,10 @@
-import { FormEventHandler, ReactNode, useRef, useState } from "react";
+import {
+  FormEventHandler,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import RegistrationInput, {
   RegistrationInputProps,
 } from "../RegisterPage/components/RegistrationInput";
@@ -38,7 +44,7 @@ const formSteps: {
           },
           {
             name: "name",
-            title: "BRegistered Company Name",
+            title: "Registered Company Name",
             type: "text",
           },
           {
@@ -80,17 +86,27 @@ const formSteps: {
           {
             name: "saluation",
             title: "Saluation",
-            type: "text",
+            type: "dropdown",
+            dropdown: ["Mr.", "Mrs.", "Ms.", "Other"],
+            lengthDivide: 2,
           },
           {
             name: "firstname",
             title: "First Name",
             type: "text",
+            lengthDivide: 2,
+          },
+          {
+            name: "firstname",
+            title: "Middle Name",
+            type: "text",
+            lengthDivide: 2,
           },
           {
             name: "lastname",
             title: "Last Name",
             type: "text",
+            lengthDivide: 2,
           },
           {
             name: "identification",
@@ -127,7 +143,7 @@ const formSteps: {
             optional: true,
           },
           {
-            name: "gstnRegistered",
+            name: "gstnNumber",
             title: "GST Number",
             type: "text",
           },
@@ -168,11 +184,11 @@ const formSteps: {
   },
   {
     title: "Educator page view",
-    content : [
+    content: [
       {
-        component : <EducatorPage/>
-      }
-    ]
+        component: <EducatorPage />,
+      },
+    ],
   },
 
   {
@@ -186,27 +202,22 @@ const formSteps: {
             title: "Salutation",
             placeholder: "John",
             type: "dropdown",
-            lengthDivide : 4,
-            dropdown: [
-              "Mr.",
-              "Mrs.",
-              "Ms.",
-              "other"
-            ],
+            lengthDivide: 4,
+            dropdown: ["Mr.", "Mrs.", "Ms.", "Other"],
           },
           {
             name: "firstName",
             title: "First Name",
             placeholder: "John",
             type: "text",
-            lengthDivide : 4
+            lengthDivide: 4,
           },
           {
             name: "lastName",
             title: "Last Name",
             placeholder: "Doe",
             type: "text",
-            lengthDivide : 3
+            lengthDivide: 6,
           },
           {
             name: "educatorProfilePic",
@@ -298,6 +309,7 @@ export default function OnboardPage() {
   const [errorCheckFlag, setErrorCheckFlag] = useState(false);
   const [teacherDetailsCount, setTeacherDetailsCount] = useState<number>(1);
   const [bankError, setBankError] = useState<Boolean>(false);
+  const [isGst, setIsGst] = useState<Boolean>(false);
 
   function addTeacherHandler() {
     setTeacherDetailsCount((count) => count + 1);
@@ -335,7 +347,23 @@ export default function OnboardPage() {
         setErrorCheckFlag((f) => !f);
       }, 1);
     }
+
+    console.log(currentStep)
   }
+  const checkVisibility = (input:any) => {
+    if (
+      input.name === "accountNumber" ||
+      input.name === "ifscCode" ||
+      input.name === "payeeName" ||
+      input.name === "Branch"
+    ) {
+      return (formData as any).cancelledCheque === undefined;
+    } else if (input.name === "gstnNumber") {
+      return (formData as any).gstnRegistered === "on";
+    } else {
+      return true;
+    }
+    }
   return (
     <form className="min-h-[50vh] flex flex-col p-page py-12">
       <div className="flex relative justify-between w-full">
@@ -395,52 +423,56 @@ export default function OnboardPage() {
         ref={currentFormRef}
         className="flex-1 flex flex-col items-stretch px-[6vw] gap-y-8 py-8"
       >
-        {currentStep === 1 ? (
+        {currentStep == 1 ? (
           <EducatorPage />
         ) : currentStep === 2 ? (
           Array.from({ length: teacherDetailsCount }).map((_, index) => (
             <div key={index}>
               <h3 className="text-2xl font-bold mb-4">Educator {index + 1}</h3>
-              <div className="flex w-full flex-wrap justify-between gap-x-5">
-              {formSteps[2].content[0].inputs &&
-                formSteps[2]?.content[0].inputs.map((input, i) => (
-                  <RegistrationInput
-                  key={i}
-                  errorCheckFlag={errorCheckFlag}
-                  value={(formData as any)[`${input.name}_${index}`]}
-                  {...input}
-                  onChange={(event) => {
-                    setFormData((prev) => ({
-                      ...prev,
-                      [`${input.name}_${index}`]: event.target.value,
-                    }));
-                  }}
-                  lengthDivide={input?.lengthDivide}
-                  />
+              <div className="flex flex-wrap justify-between">
+                {formSteps[2].content[0].inputs &&
+                  formSteps[2]?.content[0].inputs.map((input, i) => (
+                    <RegistrationInput
+                      key={i}
+                      errorCheckFlag={errorCheckFlag}
+                      value={(formData as any)[`${input.name}_${index}`]}
+                      {...input}
+                      onChange={(event) => {
+                        setFormData((prev) => ({
+                          ...prev,
+                          [`${input.name}_${index}`]: event.target.value,
+                        }));
+                      }}
+                      lengthDivide={input?.lengthDivide}
+                    />
                   ))}
-              <AddTeacherSchedule />
-                </div>
+                <AddTeacherSchedule />
+              </div>
             </div>
           ))
         ) : (
           formSteps[currentStep].content.map((item, index) => (
             <div key={index}>
               <h2 className="my-5 font-bold">{item.heading}</h2>
-              {item.inputs?.map((input, i) => (
-                <RegistrationInput
-                  key={i}
-                  multipleImages={input.name === "academyImages"}
-                  errorCheckFlag={errorCheckFlag}
-                  value={(formData as any)[input.name]}
-                  {...input}
-                  onChange={(event) => {
-                    setFormData((prev) => ({
-                      ...prev,
-                      [input.name]: event.target.value,
-                    }));
-                  }}
-                />
-              ))}
+              <div className="flex flex-wrap justify-between">
+                {item.inputs?.map((input, i) => (
+                  <RegistrationInput
+                    key={i}
+                    multipleImages={input.name === "academyImages"}
+                    errorCheckFlag={errorCheckFlag}
+                    value={(formData as any)[input.name]}
+                    {...input}
+                    onChange={(event) => {
+                      setFormData((prev) => ({
+                        ...prev,
+                        [input.name]: event.target.value,
+                      }));
+                    }}
+                    lengthDivide={input.lengthDivide}
+                    isVisible={checkVisibility(input)}
+                  />
+                ))}
+              </div>
             </div>
           ))
         )}

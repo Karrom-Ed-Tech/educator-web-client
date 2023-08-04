@@ -27,7 +27,8 @@ export interface RegistrationInputProps {
   multipleImages?: boolean;
   onSelectionChange?: (selectedItem: string) => void;
   // lengthHalf?: Boolean;
-  lengthDivide?:number
+  lengthDivide?:number;
+  isVisible?:Boolean
 }
 
 export default function RegistrationInput(props: RegistrationInputProps) {
@@ -116,7 +117,11 @@ export default function RegistrationInput(props: RegistrationInputProps) {
     : [];
 
   return (
-    <div className={props.lengthDivide ? `basis-1/${props.lengthDivide} mb-5` : "w-full mb-5"}>
+    <div className={`${
+      props.lengthDivide
+        ? `basis-1/${props.lengthDivide} mb-5 myCommonStyle`
+        : `w-full mb-5 ${!props.isVisible ? "hidden": ""}`
+    }`}>
       {props.preview && (
         <img
           className="w-[10vw] mx-auto aspect-square object-cover"
