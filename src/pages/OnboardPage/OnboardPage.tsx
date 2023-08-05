@@ -91,6 +91,12 @@ const formSteps: {
             lengthDivide: 2,
           },
           {
+            name: "saluationOther",
+            title: "Type your salutation",
+            type: "text",
+            lengthDivide: 2,
+          },
+          {
             name: "firstname",
             title: "First Name",
             type: "text",
@@ -198,26 +204,10 @@ const formSteps: {
         heading: "Educator name",
         inputs: [
           {
-            name: "salutation",
-            title: "Salutation",
-            placeholder: "John",
-            type: "dropdown",
-            lengthDivide: 4,
-            dropdown: ["Mr.", "Mrs.", "Ms.", "Other"],
-          },
-          {
-            name: "firstName",
-            title: "First Name",
-            placeholder: "John",
+            name: "educatorName",
+            title: "Educator Name",
+            placeholder: "Ex: John Doe",
             type: "text",
-            lengthDivide: 4,
-          },
-          {
-            name: "lastName",
-            title: "Last Name",
-            placeholder: "Doe",
-            type: "text",
-            lengthDivide: 6,
           },
           {
             name: "educatorProfilePic",
@@ -351,7 +341,12 @@ export default function OnboardPage() {
     console.log(currentStep)
   }
   const checkVisibility = (input:any) => {
-    if (
+    if(
+      input.name === "saluationOther"
+    ){
+      return (formData as any).saluation === "Other";
+    }
+    else if (
       input.name === "accountNumber" ||
       input.name === "ifscCode" ||
       input.name === "payeeName" ||
@@ -443,6 +438,7 @@ export default function OnboardPage() {
                           [`${input.name}_${index}`]: event.target.value,
                         }));
                       }}
+                      isVisible={true}
                       lengthDivide={input?.lengthDivide}
                     />
                   ))}

@@ -108,6 +108,7 @@ export default function AddTeacherSchedule() {
         ]}
         value={selectedDay}
         onSelectionChange={handleDropdownChange}
+        isVisible={true}
       />
       <div className="flex justify-between gap-x-5">
         <RegistrationInput
