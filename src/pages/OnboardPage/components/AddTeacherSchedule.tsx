@@ -54,7 +54,6 @@ export default function AddTeacherSchedule() {
   const [selectedStartTime, setSelectedStartTime] = useState<string>("");
   const [selectedEndTime, setSelectedEndTime] = useState<string>("");
   const [error, setError] = useState<Boolean>(false);
-
   const handleAddTiming = () => {
     setError(false);
     if(!selectedDay || !selectedStartTime || !selectedEndTime){

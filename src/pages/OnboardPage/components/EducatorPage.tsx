@@ -58,10 +58,12 @@ const form = [
           },
           {
             name: "social",
-            type: "dropdown",
             title: "Social Media handle",
-            placeholder: "Select from the below dropdown",
-            dropdown: ["Instagram", "Discord", "Facebook", "LinkedIn"],
+            type:"text",
+            // type: "dropdown",
+            placeholder: "Give your social media handle!",
+            // dropdown: ["Instagram", "Discord", "Facebook", "LinkedIn"],
+            multipleAdd : true
           },
           {
             name: "Types of courses",

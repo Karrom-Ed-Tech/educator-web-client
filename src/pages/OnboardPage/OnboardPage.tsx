@@ -232,6 +232,7 @@ const formSteps: {
             name: "QualificationOrCertification",
             title: "Qualification/Certification",
             placeholder: "Qualifications or certificates teacher has",
+            multipleAdd: true
           },
           // {
           //   name: "QualificationDoc",
